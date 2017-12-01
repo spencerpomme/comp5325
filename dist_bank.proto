@@ -22,7 +22,7 @@ message LookUpRequest {
 // Look up account balance reply.
 // String info saying whether the request is successful and
 // float number telling the account balance.
-// If account does not exist, only fail info will be replied.
+// If account does not exist, only fail res_info will be replied.
 message LookUpRely {
     string res_info = 1;
     float account_balance = 2;
@@ -38,7 +38,7 @@ message WithdrawRequest {
 // Withdraw money reply
 // String info saying whether the request is successful and
 // float number update_balance tell the updated account balance.
-// If account does not exist, only fail info will be replied.
+// If account does not exist, only fail res_info will be replied.
 message WithdrawReply {
     string res_info = 1;
     float updated_balance = 2;
@@ -54,7 +54,7 @@ message SaveRequest {
 // Save money reply
 // String info saying whether the request is successful and
 // float number update_balance tell the updated account balance.
-// If account does not exist, only fail info will be replied.
+// If account does not exist, only fail res_info will be replied.
 message SaveReply {
     string res_info = 1;
     float  updated_balance = 2;
