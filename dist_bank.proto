@@ -10,24 +10,15 @@ package dist_bank;
 
 // definition of the service
 service DistBank {
-    rpc LookUpAccount (LookUpRequest) returns (LookUpRely) {}
-    rpc Withdraw (WithdrawRequest) returns (WithdrawReply) {}
-    rpc Save(SaveRequest) returns (SaveReply) {}
+    rpc LookUpAccount (LookUpRequest) returns (BalanceRecord) {}
+    rpc Withdraw (WithdrawRequest) returns (BalanceRecord) {}
+    rpc Save(SaveRequest) returns (BalanceRecord) {}
 }
 
 // Look up account balance request.
 // The account id of the client, must be provided.
 message LookUpRequest {
     string account_id = 1;
-}
-
-// Look up account balance reply.
-// String info saying whether the request is successful and
-// float number telling the account balance.
-// If account does not exist, only fail res_info will be replied.
-message LookUpRely {
-    string res_info = 1;
-    float account_balance = 2;
 }
 
 // Withdraw money request.
@@ -37,14 +28,6 @@ message WithdrawRequest {
     float with_amount = 2;
 }
 
-// Withdraw money reply
-// String info saying whether the request is successful and
-// float number update_balance tell the updated account balance.
-// If account does not exist, only fail res_info will be replied.
-message WithdrawReply {
-    string res_info = 1;
-    float updated_balance = 2;
-}
 
 // Save money request.
 // The account id of the client, must be provided.
@@ -53,13 +36,13 @@ message SaveRequest {
     float save_amount = 2;
 }
 
-// Save money reply
+// Reply message for above requests
 // String info saying whether the request is successful and
-// float number update_balance tell the updated account balance.
+// float number update_balance tell the updated account balance
+// int number index for faster search.
 // If account does not exist, only fail res_info will be replied.
-message SaveReply {
-    string res_info = 1;
-    float  updated_balance = 2;
+message BalanceRecord {
+    float  updated_balance = 1;
+    int32 index = 2;
+    string res_info = 3;
 }
-
-// TODO: Can anyone think of how to implement the 'disconnect' functionality?
