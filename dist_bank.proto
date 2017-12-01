@@ -28,21 +28,33 @@ message LookUpRely {
     float account_balance = 2;
 }
 
+// Withdraw money request.
+// The account id of the client, must be provided.
 message WithdrawRequest {
     string account_id = 1;
     float with_amount = 2;
 }
 
+// Withdraw money reply
+// String info saying whether the request is successful and
+// float number update_balance tell the updated account balance.
+// If account does not exist, only fail info will be replied.
 message WithdrawReply {
     string res_info = 1;
     float updated_balance = 2;
 }
 
+// Save money request.
+// The account id of the client, must be provided.
 message SaveRequest {
     string account_id = 1;
     float save_amount = 2;
 }
 
+// Save money reply
+// String info saying whether the request is successful and
+// float number update_balance tell the updated account balance.
+// If account does not exist, only fail info will be replied.
 message SaveReply {
     string res_info = 1;
     float  updated_balance = 2;
