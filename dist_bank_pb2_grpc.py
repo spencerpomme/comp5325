@@ -17,17 +17,17 @@ class DistBankStub(object):
     self.LookUpAccount = channel.unary_unary(
         '/dist_bank.DistBank/LookUpAccount',
         request_serializer=dist__bank__pb2.LookUpRequest.SerializeToString,
-        response_deserializer=dist__bank__pb2.LookUpRely.FromString,
+        response_deserializer=dist__bank__pb2.BalanceRecord.FromString,
         )
     self.Withdraw = channel.unary_unary(
         '/dist_bank.DistBank/Withdraw',
         request_serializer=dist__bank__pb2.WithdrawRequest.SerializeToString,
-        response_deserializer=dist__bank__pb2.WithdrawReply.FromString,
+        response_deserializer=dist__bank__pb2.BalanceRecord.FromString,
         )
     self.Save = channel.unary_unary(
         '/dist_bank.DistBank/Save',
         request_serializer=dist__bank__pb2.SaveRequest.SerializeToString,
-        response_deserializer=dist__bank__pb2.SaveReply.FromString,
+        response_deserializer=dist__bank__pb2.BalanceRecord.FromString,
         )
 
 
@@ -62,17 +62,17 @@ def add_DistBankServicer_to_server(servicer, server):
       'LookUpAccount': grpc.unary_unary_rpc_method_handler(
           servicer.LookUpAccount,
           request_deserializer=dist__bank__pb2.LookUpRequest.FromString,
-          response_serializer=dist__bank__pb2.LookUpRely.SerializeToString,
+          response_serializer=dist__bank__pb2.BalanceRecord.SerializeToString,
       ),
       'Withdraw': grpc.unary_unary_rpc_method_handler(
           servicer.Withdraw,
           request_deserializer=dist__bank__pb2.WithdrawRequest.FromString,
-          response_serializer=dist__bank__pb2.WithdrawReply.SerializeToString,
+          response_serializer=dist__bank__pb2.BalanceRecord.SerializeToString,
       ),
       'Save': grpc.unary_unary_rpc_method_handler(
           servicer.Save,
           request_deserializer=dist__bank__pb2.SaveRequest.FromString,
-          response_serializer=dist__bank__pb2.SaveReply.SerializeToString,
+          response_serializer=dist__bank__pb2.BalanceRecord.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

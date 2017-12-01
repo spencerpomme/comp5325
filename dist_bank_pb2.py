@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='dist_bank.proto',
   package='dist_bank',
   syntax='proto3',
-  serialized_pb=_b('\n\x0f\x64ist_bank.proto\x12\tdist_bank\"#\n\rLookUpRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\"7\n\nLookUpRely\x12\x10\n\x08res_info\x18\x01 \x01(\t\x12\x17\n\x0f\x61\x63\x63ount_balance\x18\x02 \x01(\x02\":\n\x0fWithdrawRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bwith_amount\x18\x02 \x01(\x02\":\n\rWithdrawReply\x12\x10\n\x08res_info\x18\x01 \x01(\t\x12\x17\n\x0fupdated_balance\x18\x02 \x01(\x02\"6\n\x0bSaveRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bsave_amount\x18\x02 \x01(\x02\"6\n\tSaveReply\x12\x10\n\x08res_info\x18\x01 \x01(\t\x12\x17\n\x0fupdated_balance\x18\x02 \x01(\x02\x32\xca\x01\n\x08\x44istBank\x12\x42\n\rLookUpAccount\x12\x18.dist_bank.LookUpRequest\x1a\x15.dist_bank.LookUpRely\"\x00\x12\x42\n\x08Withdraw\x12\x1a.dist_bank.WithdrawRequest\x1a\x18.dist_bank.WithdrawReply\"\x00\x12\x36\n\x04Save\x12\x16.dist_bank.SaveRequest\x1a\x14.dist_bank.SaveReply\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0f\x64ist_bank.proto\x12\tdist_bank\"#\n\rLookUpRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\":\n\x0fWithdrawRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bwith_amount\x18\x02 \x01(\x02\"6\n\x0bSaveRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bsave_amount\x18\x02 \x01(\x02\"I\n\rBalanceRecord\x12\x17\n\x0fupdated_balance\x18\x01 \x01(\x02\x12\r\n\x05index\x18\x02 \x01(\x05\x12\x10\n\x08res_info\x18\x03 \x01(\t2\xd1\x01\n\x08\x44istBank\x12\x45\n\rLookUpAccount\x12\x18.dist_bank.LookUpRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12\x42\n\x08Withdraw\x12\x1a.dist_bank.WithdrawRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12:\n\x04Save\x12\x16.dist_bank.SaveRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x62\x06proto3')
 )
 
 
@@ -56,44 +56,6 @@ _LOOKUPREQUEST = _descriptor.Descriptor(
 )
 
 
-_LOOKUPRELY = _descriptor.Descriptor(
-  name='LookUpRely',
-  full_name='dist_bank.LookUpRely',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='res_info', full_name='dist_bank.LookUpRely.res_info', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='account_balance', full_name='dist_bank.LookUpRely.account_balance', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=122,
-)
-
-
 _WITHDRAWREQUEST = _descriptor.Descriptor(
   name='WithdrawRequest',
   full_name='dist_bank.WithdrawRequest',
@@ -127,46 +89,8 @@ _WITHDRAWREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=124,
-  serialized_end=182,
-)
-
-
-_WITHDRAWREPLY = _descriptor.Descriptor(
-  name='WithdrawReply',
-  full_name='dist_bank.WithdrawReply',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='res_info', full_name='dist_bank.WithdrawReply.res_info', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='updated_balance', full_name='dist_bank.WithdrawReply.updated_balance', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=184,
-  serialized_end=242,
+  serialized_start=67,
+  serialized_end=125,
 )
 
 
@@ -203,29 +127,36 @@ _SAVEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=244,
-  serialized_end=298,
+  serialized_start=127,
+  serialized_end=181,
 )
 
 
-_SAVEREPLY = _descriptor.Descriptor(
-  name='SaveReply',
-  full_name='dist_bank.SaveReply',
+_BALANCERECORD = _descriptor.Descriptor(
+  name='BalanceRecord',
+  full_name='dist_bank.BalanceRecord',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='res_info', full_name='dist_bank.SaveReply.res_info', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='updated_balance', full_name='dist_bank.BalanceRecord.updated_balance', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='updated_balance', full_name='dist_bank.SaveReply.updated_balance', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='index', full_name='dist_bank.BalanceRecord.index', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='res_info', full_name='dist_bank.BalanceRecord.res_info', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -241,16 +172,14 @@ _SAVEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=300,
-  serialized_end=354,
+  serialized_start=183,
+  serialized_end=256,
 )
 
 DESCRIPTOR.message_types_by_name['LookUpRequest'] = _LOOKUPREQUEST
-DESCRIPTOR.message_types_by_name['LookUpRely'] = _LOOKUPRELY
 DESCRIPTOR.message_types_by_name['WithdrawRequest'] = _WITHDRAWREQUEST
-DESCRIPTOR.message_types_by_name['WithdrawReply'] = _WITHDRAWREPLY
 DESCRIPTOR.message_types_by_name['SaveRequest'] = _SAVEREQUEST
-DESCRIPTOR.message_types_by_name['SaveReply'] = _SAVEREPLY
+DESCRIPTOR.message_types_by_name['BalanceRecord'] = _BALANCERECORD
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 LookUpRequest = _reflection.GeneratedProtocolMessageType('LookUpRequest', (_message.Message,), dict(
@@ -260,26 +189,12 @@ LookUpRequest = _reflection.GeneratedProtocolMessageType('LookUpRequest', (_mess
   ))
 _sym_db.RegisterMessage(LookUpRequest)
 
-LookUpRely = _reflection.GeneratedProtocolMessageType('LookUpRely', (_message.Message,), dict(
-  DESCRIPTOR = _LOOKUPRELY,
-  __module__ = 'dist_bank_pb2'
-  # @@protoc_insertion_point(class_scope:dist_bank.LookUpRely)
-  ))
-_sym_db.RegisterMessage(LookUpRely)
-
 WithdrawRequest = _reflection.GeneratedProtocolMessageType('WithdrawRequest', (_message.Message,), dict(
   DESCRIPTOR = _WITHDRAWREQUEST,
   __module__ = 'dist_bank_pb2'
   # @@protoc_insertion_point(class_scope:dist_bank.WithdrawRequest)
   ))
 _sym_db.RegisterMessage(WithdrawRequest)
-
-WithdrawReply = _reflection.GeneratedProtocolMessageType('WithdrawReply', (_message.Message,), dict(
-  DESCRIPTOR = _WITHDRAWREPLY,
-  __module__ = 'dist_bank_pb2'
-  # @@protoc_insertion_point(class_scope:dist_bank.WithdrawReply)
-  ))
-_sym_db.RegisterMessage(WithdrawReply)
 
 SaveRequest = _reflection.GeneratedProtocolMessageType('SaveRequest', (_message.Message,), dict(
   DESCRIPTOR = _SAVEREQUEST,
@@ -288,12 +203,12 @@ SaveRequest = _reflection.GeneratedProtocolMessageType('SaveRequest', (_message.
   ))
 _sym_db.RegisterMessage(SaveRequest)
 
-SaveReply = _reflection.GeneratedProtocolMessageType('SaveReply', (_message.Message,), dict(
-  DESCRIPTOR = _SAVEREPLY,
+BalanceRecord = _reflection.GeneratedProtocolMessageType('BalanceRecord', (_message.Message,), dict(
+  DESCRIPTOR = _BALANCERECORD,
   __module__ = 'dist_bank_pb2'
-  # @@protoc_insertion_point(class_scope:dist_bank.SaveReply)
+  # @@protoc_insertion_point(class_scope:dist_bank.BalanceRecord)
   ))
-_sym_db.RegisterMessage(SaveReply)
+_sym_db.RegisterMessage(BalanceRecord)
 
 
 
@@ -303,8 +218,8 @@ _DISTBANK = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=357,
-  serialized_end=559,
+  serialized_start=259,
+  serialized_end=468,
   methods=[
   _descriptor.MethodDescriptor(
     name='LookUpAccount',
@@ -312,7 +227,7 @@ _DISTBANK = _descriptor.ServiceDescriptor(
     index=0,
     containing_service=None,
     input_type=_LOOKUPREQUEST,
-    output_type=_LOOKUPRELY,
+    output_type=_BALANCERECORD,
     options=None,
   ),
   _descriptor.MethodDescriptor(
@@ -321,7 +236,7 @@ _DISTBANK = _descriptor.ServiceDescriptor(
     index=1,
     containing_service=None,
     input_type=_WITHDRAWREQUEST,
-    output_type=_WITHDRAWREPLY,
+    output_type=_BALANCERECORD,
     options=None,
   ),
   _descriptor.MethodDescriptor(
@@ -330,7 +245,7 @@ _DISTBANK = _descriptor.ServiceDescriptor(
     index=2,
     containing_service=None,
     input_type=_SAVEREQUEST,
-    output_type=_SAVEREPLY,
+    output_type=_BALANCERECORD,
     options=None,
   ),
 ])
