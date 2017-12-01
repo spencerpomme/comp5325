@@ -4,7 +4,7 @@
 // using version 3
 syntax = "proto3";
 
-package dist_bank
+package dist_bank;
 
 // definition of the service
 service DistBank {
@@ -16,7 +16,7 @@ service DistBank {
 // Look up account balance request.
 // The account id of the client, must be provided.
 message LookUpRequest {
-    required string account_id = 1;
+    string account_id = 1;
 }
 
 // Look up account balance reply.
@@ -24,26 +24,26 @@ message LookUpRequest {
 // float number telling the account balance.
 // If account does not exist, only fail info will be replied.
 message LookUpRely {
-    required string res_info = 1;
-    optional float account_balance = 2;
+    string res_info = 1;
+    float account_balance = 2;
 }
 
 message WithdrawRequest {
-    required string account_id = 1;
-    required float with_amount = 2;
+    string account_id = 1;
+    float with_amount = 2;
 }
 
 message WithdrawReply {
-    required string res_info = 1;
-    optional float updated_balance = 2;
+    string res_info = 1;
+    float updated_balance = 2;
 }
 
 message SaveRequest {
-    required string account_id = 1;
-    required float save_amount = 2;
+    string account_id = 1;
+    float save_amount = 2;
 }
 
 message SaveReply {
-    required string res_info = 1;
-    optional float  updated_balance = 2;
+    string res_info = 1;
+    float  updated_balance = 2;
 }
