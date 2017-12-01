@@ -9,6 +9,7 @@ We are using proto **3**
 1. [About grpc python API](https://grpc.io/grpc/python/)
 2. [Proto3 language guide](https://developers.google.com/protocol-buffers/docs/proto3)
 3. [Basic tutorial everyone have to walkthrough](https://grpc.io/docs/tutorials/basic/python.html)
+4. [Contribution Guidlines](https://github.com/spencerpomme/comp5325/blob/master/CONTRIBUTING.md)
 
 **Feel free to add more useful resources here by giving the urls**
 
