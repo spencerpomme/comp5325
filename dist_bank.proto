@@ -42,7 +42,7 @@ message SaveRequest {
 // int number index for faster search.
 // If account does not exist, only fail res_info will be replied.
 message BalanceRecord {
-    float  updated_balance = 1;
+    float updated_balance = 1;
     int32 index = 2;
     string res_info = 3;
 }
