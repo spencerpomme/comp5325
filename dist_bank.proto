@@ -1,5 +1,7 @@
 // proto for distributed bank
 // dist_bank.proto
+// IMPORTANT!!
+// You can use this .proto file to generate classes in your preffered luanguage
 
 // using version 3
 syntax = "proto3";
@@ -59,3 +61,5 @@ message SaveReply {
     string res_info = 1;
     float  updated_balance = 2;
 }
+
+// TODO: Can anyone think of how to implement the 'disconnect' functionality?
