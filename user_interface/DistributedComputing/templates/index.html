@@ -72,8 +72,8 @@
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Current Account:     {{ id }}</h1>
-          <h2><span id="balance">Balance: {{ balance }}</span></h2>
+        <h1>CurrentID:<span id="id">{{ id }}</span></h1>
+          <h2>Balance:<span id="balance">{{ balance }}</span></h2>
 
       </div>
       <p>
@@ -117,12 +117,12 @@
     <script src="../static/bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 
     <script type="text/javascript">
-        function search_account(current_elem, type, id){
+        function opearte(current_elem, type, id, amount){
             $.ajax({
                 cache: false,
                 type: "POST",
                 url:"{% url 'search_account' %}",
-                data:{'id':id, 'type': type},
+                data:{'id':id, 'type': type, 'amount': amount},
                 async: true,
                 <!--需要将csrf_token传到request的header里，否则无法通过验证-->
                 beforeSend:function(xhr, settings){
@@ -130,69 +130,30 @@
                 },
                 success: function(data) {
                     if(data.status == 'fail'){
-                        if(data.msg == '用户不存在'){
-                        }else{
-                        }
+
                     }else if(data.status == 'success'){
-                        $('#balance').text(data.balance)
+                        if(data.type == 'save' || data.type == 'withdraw')
+                            $('#balance').html(data.balance)
+                        if(data.type == 'search'){
+                            $('#balance').html(data.balance)
+                            $('#id').html(data.id)
+                        }
+
                     }
                 },
             });
         }
 
-        function save_money(current_elem, type, id, amount){
-            $.ajax({
-                cache: false,
-                type: "POST",
-                url:"{% url 'search_account' %}",
-                data:{'type': type, 'id': id, 'amount': amount},
-                async: true,
-                <!--需要将csrf_token传到request的header里，否则无法通过验证-->
-                beforeSend:function(xhr, settings){
-                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
-                },
-                success: function(data) {
-                    if(data.status == 'fail'){
-                        if(data.msg == '用户不存在'){
-                        }else{
-                        }
-                    }else if(data.status == 'success'){
-                        $('#balance').text(data.balance)
-                    }
-                },
-            });
-        }
 
-        function withdraw(current_elem, type, id, amount){
-            $.ajax({
-                cache: false,
-                type: "POST",
-                url:"{% url 'search_account' %}",
-                data:{'type': type, 'id': id, 'amount': amount},
-                async: true,
-                <!--需要将csrf_token传到request的header里，否则无法通过验证-->
-                beforeSend:function(xhr, settings){
-                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
-                },
-                success: function(data) {
-                    if(data.status == 'fail'){
-                        alert('error')
-                    }else if(data.status == 'success'){
-                        alert(data.balance)
-                        $('#balance').text(data.balance)
-                    }
-                },
-            });
-        }
 
         $('.search').on('click', function(){
-            search_account($(this), 'search', $('#user_id').val());
+            opearte($(this), 'search', $('#user_id').val(), 0);
         });
         $('.save').on('click', function(){
-            save_money($(this), 'save', $('#user_id').val(), $('#save_amount').val());
+            opearte($(this), 'save', $('#user_id').val(), $('#save_amount').val());
         });
         $('.withdraw').on('click', function(){
-            withdraw($(this), 'withdraw', $('#user_id').val(), $('#withdraw_amount').val());
+            opearte($(this), 'withdraw', $('#user_id').val(), $('#withdraw_amount').val());
         });
     </script>
   </body>
