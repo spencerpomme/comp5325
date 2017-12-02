@@ -44,11 +44,11 @@ def modify_dist_bank_database_withdraw(request): # NOT DONE YET!
         db = json.load(dist_bank_db_file)
         for item in db:
             if item["uid"] == request.uid:
-                if item["balance"] >= request.with_amount:
+                if float(item["balance"]) >= request.with_amount:
                     print("Before withdraw operation:")
                     print(item)
                     print("After withdraw operation:")
-                    item["balance"] = str(float(item["balance"]) - request.with_amount)
+                    item.update({"balance": str(float(item["balance"]) - request.with_amount)})
                     print(item)
                 else:
                     return _NOT_ENOUGH_MONEY
@@ -64,21 +64,24 @@ def modify_dist_bank_database_save(request): # NOT DONE YEt!
     request: <class 'dist_bank_pb2.WithdrawRequest'> or <class 'dist_bank_pb2.SaveRequest'>
     returns: bool
     """
-    with open("dist_bank_db.json") as dist_bank_db_file:
+    try:
+        dist_bank_db_file = open("dist_bank_db.json", "r")
         db = json.load(dist_bank_db_file)
-        for item in db:
-            if item["uid"] == request.uid:
-                if item["balance"] >= request.save_amount:
-                    print("Before withdraw operation:")
-                    print(item)
-                    print("After withdraw operation:")
-                    item["balance"] = str(float(item["balance"]) + request.save_amount)
-                    print(item)
+        print('bf-->', db[0])
+        for i in range(len(db)):
+            if db[i]["uid"] == request.uid:
+                db[i].update({"balance": str(float(db[i]["balance"]) + request.save_amount)})
+                # print(new_db[i])
+        print('af-->', db[0])
+        dist_bank_db_file.close()
+        dist_bank_db_file = open("dist_bank_db.json", "w")
+        json.dump(db, dist_bank_db_file)
+    finally:
+        dist_bank_db_file.close()
 
-            else:
-                return _MODIFICATION_ERR
 
 if __name__ == "__main__":
 
-    modify_dist_bank_database(dist_bank_pb2.WithdrawRequest(uid="5a221afc4fcb9e8932acaf8b", with_amount=94274.05))
-
+    #modify_dist_bank_database_withdraw(dist_bank_pb2.WithdrawRequest(uid="5a221afc4fcb9e8932acaf8b", with_amount=94274.05))
+    print('\n\n')
+    modify_dist_bank_database_save(dist_bank_pb2.SaveRequest(uid="5a221afc4fcb9e8932acaf8b", save_amount=94274.05))
