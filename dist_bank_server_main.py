@@ -10,12 +10,17 @@ import dist_bank_resources
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
-class DistBank(route_guide_pb2_grpc.DistBankServicer):
+class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
     """
     Provides methods that implement functionality of dist bank server.
     """
     def __init__(self):
-        self.db = dist_bank_resources.read_route_guide_database()
+        """
+        Load account data
+        """
+        self.db = dist_bank_resources.read_dist_bank_database()
+        print(type(self.db))
+        print(self.db)
 
     # TODO: Implement other methods.
     def LookUpAccount(self, request, context):
@@ -24,7 +29,8 @@ class DistBank(route_guide_pb2_grpc.DistBankServicer):
         request: A LookUpRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        raise NotImplementedError
+        print('LookUpAccount')
+
 
     def Withdraw(self, request, context):
         """
@@ -32,7 +38,7 @@ class DistBank(route_guide_pb2_grpc.DistBankServicer):
         request: A WithdrawRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        raise NotImplementedError
+        print('Withdraw')
 
     def Save(self, request, context):
         """
@@ -40,7 +46,7 @@ class DistBank(route_guide_pb2_grpc.DistBankServicer):
         request: A SaveRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        raise NotImplementedError
+        print('Save')
 
 
 def serve():

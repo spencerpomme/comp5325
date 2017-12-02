@@ -21,6 +21,6 @@ def read_dist_bank_database():
             record = dist_bank_pb2.BalanceRecord(
                 uid=item["uid"],
                 index=item["index"],
-                balance=item["balance"])
+                balance=float(item["balance"]))
             record_list.append(record)
     return record_list
