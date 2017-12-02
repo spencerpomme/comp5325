@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='dist_bank.proto',
   package='dist_bank',
   syntax='proto3',
-  serialized_pb=_b('\n\x0f\x64ist_bank.proto\x12\tdist_bank\"#\n\rLookUpRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\":\n\x0fWithdrawRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bwith_amount\x18\x02 \x01(\x02\"6\n\x0bSaveRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bsave_amount\x18\x02 \x01(\x02\"N\n\rBalanceRecord\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x0f\n\x07\x62\x61lance\x18\x02 \x01(\x02\x12\r\n\x05index\x18\x03 \x01(\x05\x12\x10\n\x08res_info\x18\x04 \x01(\t2\xd1\x01\n\x08\x44istBank\x12\x45\n\rLookUpAccount\x12\x18.dist_bank.LookUpRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12\x42\n\x08Withdraw\x12\x1a.dist_bank.WithdrawRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12:\n\x04Save\x12\x16.dist_bank.SaveRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0f\x64ist_bank.proto\x12\tdist_bank\"\x1c\n\rLookUpRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\"3\n\x0fWithdrawRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x13\n\x0bwith_amount\x18\x02 \x01(\x02\"/\n\x0bSaveRequest\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x13\n\x0bsave_amount\x18\x02 \x01(\x02\"N\n\rBalanceRecord\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x0f\n\x07\x62\x61lance\x18\x02 \x01(\x02\x12\r\n\x05index\x18\x03 \x01(\x05\x12\x10\n\x08res_info\x18\x04 \x01(\t2\xd1\x01\n\x08\x44istBank\x12\x45\n\rLookUpAccount\x12\x18.dist_bank.LookUpRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12\x42\n\x08Withdraw\x12\x1a.dist_bank.WithdrawRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12:\n\x04Save\x12\x16.dist_bank.SaveRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x62\x06proto3')
 )
 
 
@@ -33,7 +33,7 @@ _LOOKUPREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='account_id', full_name='dist_bank.LookUpRequest.account_id', index=0,
+      name='uid', full_name='dist_bank.LookUpRequest.uid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -52,7 +52,7 @@ _LOOKUPREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=30,
-  serialized_end=65,
+  serialized_end=58,
 )
 
 
@@ -64,7 +64,7 @@ _WITHDRAWREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='account_id', full_name='dist_bank.WithdrawRequest.account_id', index=0,
+      name='uid', full_name='dist_bank.WithdrawRequest.uid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -89,8 +89,8 @@ _WITHDRAWREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=67,
-  serialized_end=125,
+  serialized_start=60,
+  serialized_end=111,
 )
 
 
@@ -102,7 +102,7 @@ _SAVEREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='account_id', full_name='dist_bank.SaveRequest.account_id', index=0,
+      name='uid', full_name='dist_bank.SaveRequest.uid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -127,8 +127,8 @@ _SAVEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=127,
-  serialized_end=181,
+  serialized_start=113,
+  serialized_end=160,
 )
 
 
@@ -179,8 +179,8 @@ _BALANCERECORD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=183,
-  serialized_end=261,
+  serialized_start=162,
+  serialized_end=240,
 )
 
 DESCRIPTOR.message_types_by_name['LookUpRequest'] = _LOOKUPREQUEST
@@ -225,8 +225,8 @@ _DISTBANK = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=264,
-  serialized_end=473,
+  serialized_start=243,
+  serialized_end=452,
   methods=[
   _descriptor.MethodDescriptor(
     name='LookUpAccount',

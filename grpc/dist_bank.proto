@@ -18,13 +18,13 @@ service DistBank {
 // Look up account balance request.
 // The account id of the client, must be provided.
 message LookUpRequest {
-    string account_id = 1;
+    string uid = 1;
 }
 
 // Withdraw money request.
 // The account id of the client, must be provided.
 message WithdrawRequest {
-    string account_id = 1;
+    string uid = 1;
     float with_amount = 2;
 }
 
@@ -32,7 +32,7 @@ message WithdrawRequest {
 // Save money request.
 // The account id of the client, must be provided.
 message SaveRequest {
-    string account_id = 1;
+    string uid = 1;
     float save_amount = 2;
 }
 
