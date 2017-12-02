@@ -5,6 +5,9 @@ Find useful syntax references of protocol buffer [here](https://developers.googl
 
 We are using proto **3**
 
+## Roadmap
+![3 stages possible](https://github.com/spencerpomme/comp5325/blob/master/assets/roadmap.png)
+
 ## Useful links:
 1. [About grpc python API](https://grpc.io/grpc/python/)
 2. [Proto3 language guide](https://developers.google.com/protocol-buffers/docs/proto3)
