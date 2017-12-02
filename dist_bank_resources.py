@@ -21,6 +21,7 @@ def read_dist_bank_database():
             record = dist_bank_pb2.BalanceRecord(
                 uid=item["uid"],
                 index=item["index"],
+                # Balance field is a string in json, so change to float:
                 balance=float(item["balance"]))
             record_list.append(record)
     return record_list
