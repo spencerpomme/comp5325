@@ -2,12 +2,9 @@
 """
 The Python implementation of the gRPC dist bank client.
 """
-
 import random
 import time
-
 import grpc
-
 import dist_bank_pb2
 import dist_bank_pb2_grpc
 import dist_bank_resources
