@@ -1,417 +1,342 @@
 [
   {
-    "balance": "$32,328.15",
+    "balance": "94274.05",
     "index": 0,
-    "uid": "5a2164d725d7855bdf2233f6"
+    "uid": "5a221afc4fcb9e8932acaf8b"
   },
   {
-    "balance": "$10,564.94",
+    "balance": "63658.38",
     "index": 1,
-    "uid": "5a2164d7f1f587d931599a73"
+    "uid": "5a221afcac1433403e6e8c94"
   },
   {
-    "balance": "$94,465.38",
+    "balance": "83524.52",
     "index": 2,
-    "uid": "5a2164d72e832dbf047f1dad"
+    "uid": "5a221afca889e1c9a7431b23"
   },
   {
-    "balance": "$5,680.71",
+    "balance": "6573.56",
     "index": 3,
-    "uid": "5a2164d7dbbfd2e80ab44f8c"
+    "uid": "5a221afc4f8afd49f7bd5bd1"
   },
   {
-    "balance": "$79,901.86",
+    "balance": "8373.10",
     "index": 4,
-    "uid": "5a2164d7fdcc2ce50cb0b399"
+    "uid": "5a221afce88168f3f7229406"
   },
   {
-    "balance": "$89,231.86",
+    "balance": "4277.76",
     "index": 5,
-    "uid": "5a2164d7d0fab2b78f831900"
+    "uid": "5a221afc48504ccf3f97e94e"
   },
   {
-    "balance": "$24,210.30",
+    "balance": "41257.40",
     "index": 6,
-    "uid": "5a2164d7198445b8fb5e50f5"
+    "uid": "5a221afc3c2ee3df7eccee8d"
   },
   {
-    "balance": "$13,860.64",
+    "balance": "43397.56",
     "index": 7,
-    "uid": "5a2164d7fc86fc684cb7a897"
+    "uid": "5a221afc3584e47369c11e1b"
   },
   {
-    "balance": "$1,688.53",
+    "balance": "38053.34",
     "index": 8,
-    "uid": "5a2164d7102a891b982b94f8"
+    "uid": "5a221afca3ee1f45e3603ff7"
   },
   {
-    "balance": "$69,813.41",
+    "balance": "88880.16",
     "index": 9,
-    "uid": "5a2164d7aee0199f6954bee4"
+    "uid": "5a221afc0542d8a88c367cc3"
   },
   {
-    "balance": "$90,453.63",
+    "balance": "66395.89",
     "index": 10,
-    "uid": "5a2164d785a10ff250ea1fb0"
+    "uid": "5a221afc03a8fd244ef0dd2c"
   },
   {
-    "balance": "$74,738.86",
+    "balance": "21250.02",
     "index": 11,
-    "uid": "5a2164d7b1b8d0776b22fab6"
+    "uid": "5a221afc82485988e45efd2f"
   },
   {
-    "balance": "$97,130.78",
+    "balance": "49670.85",
     "index": 12,
-    "uid": "5a2164d77da13234271cfb1d"
+    "uid": "5a221afca8284a3b4625016c"
   },
   {
-    "balance": "$74,078.33",
+    "balance": "7493.19",
     "index": 13,
-    "uid": "5a2164d731b45b5280dddc3d"
+    "uid": "5a221afc432e850ec3bb0a5e"
   },
   {
-    "balance": "$26,695.09",
+    "balance": "9356.95",
     "index": 14,
-    "uid": "5a2164d78274a036972e22b0"
+    "uid": "5a221afc876621ecdd307973"
   },
   {
-    "balance": "$74,157.71",
+    "balance": "46428.14",
     "index": 15,
-    "uid": "5a2164d7551973d7f3512127"
+    "uid": "5a221afc19da6fab7be8d22c"
   },
   {
-    "balance": "$17,593.74",
+    "balance": "37066.27",
     "index": 16,
-    "uid": "5a2164d733bda6c111b9e904"
+    "uid": "5a221afc32ff6edb58e134ef"
   },
   {
-    "balance": "$8,187.93",
+    "balance": "19052.20",
     "index": 17,
-    "uid": "5a2164d7dd4e3e86b5a03b33"
+    "uid": "5a221afcbfa8995a8ab58ad6"
   },
   {
-    "balance": "$38,862.22",
+    "balance": "53509.44",
     "index": 18,
-    "uid": "5a2164d73817876acfe820a4"
+    "uid": "5a221afc736cf1466eeebcda"
   },
   {
-    "balance": "$37,771.56",
+    "balance": "72613.15",
     "index": 19,
-    "uid": "5a2164d70fcb9be21ac792a0"
+    "uid": "5a221afc5750d6dd75d9b57e"
   },
   {
-    "balance": "$29,147.28",
+    "balance": "57148.81",
     "index": 20,
-    "uid": "5a2164d797080c273c852ca1"
+    "uid": "5a221afc9ba50f978dbe84b0"
   },
   {
-    "balance": "$27,724.57",
+    "balance": "24875.84",
     "index": 21,
-    "uid": "5a2164d7061c4224a6204153"
+    "uid": "5a221afcbed552ce88509612"
   },
   {
-    "balance": "$89,261.22",
+    "balance": "71834.57",
     "index": 22,
-    "uid": "5a2164d7ed2ec38393deb0f4"
+    "uid": "5a221afcca7f71a7c4f653ab"
   },
   {
-    "balance": "$79,742.67",
+    "balance": "994.40",
     "index": 23,
-    "uid": "5a2164d7c9840d90e58132a7"
+    "uid": "5a221afc6e200de160647cd9"
   },
   {
-    "balance": "$53,718.98",
+    "balance": "70601.23",
     "index": 24,
-    "uid": "5a2164d795a1951d2c60fedf"
+    "uid": "5a221afc8f8c94d8efa7322e"
   },
   {
-    "balance": "$37,197.95",
+    "balance": "33678.45",
     "index": 25,
-    "uid": "5a2164d790602a143354f257"
+    "uid": "5a221afc9103441a32dfda13"
   },
   {
-    "balance": "$86,050.96",
+    "balance": "60364.50",
     "index": 26,
-    "uid": "5a2164d79147c959a3787302"
+    "uid": "5a221afcf7dff9fe4774ffe0"
   },
   {
-    "balance": "$35,679.22",
+    "balance": "21635.71",
     "index": 27,
-    "uid": "5a2164d7832911f4be1fc52d"
+    "uid": "5a221afc0663ffdd9817baa4"
   },
   {
-    "balance": "$90,506.69",
+    "balance": "801.00",
     "index": 28,
-    "uid": "5a2164d7f4f261e8b7683bdd"
+    "uid": "5a221afc007cb18f97bcf262"
   },
   {
-    "balance": "$59,801.76",
+    "balance": "73942.77",
     "index": 29,
-    "uid": "5a2164d7b14eb338204a8c86"
+    "uid": "5a221afc0dee8e4173660ce4"
   },
   {
-    "balance": "$43,390.21",
+    "balance": "40307.69",
     "index": 30,
-    "uid": "5a2164d739aeaff44337f668"
+    "uid": "5a221afcdd22677fe7fd9671"
   },
   {
-    "balance": "$43,628.64",
+    "balance": "42297.12",
     "index": 31,
-    "uid": "5a2164d77ff53c9ff09bb1d4"
+    "uid": "5a221afc45e83f1f5b16e394"
   },
   {
-    "balance": "$56,699.92",
+    "balance": "44563.04",
     "index": 32,
-    "uid": "5a2164d7e6ab1950cf07c0f6"
+    "uid": "5a221afc378d9676e7ea505e"
   },
   {
-    "balance": "$17,838.08",
+    "balance": "24727.47",
     "index": 33,
-    "uid": "5a2164d7d693d00e7cbdd0c6"
+    "uid": "5a221afcf4a23f655bd249ec"
   },
   {
-    "balance": "$83,499.72",
+    "balance": "89380.95",
     "index": 34,
-    "uid": "5a2164d78f6545c2eae0ebde"
+    "uid": "5a221afceec62ec835ade2d5"
   },
   {
-    "balance": "$66,949.50",
+    "balance": "21751.91",
     "index": 35,
-    "uid": "5a2164d7f80182d8f8094454"
+    "uid": "5a221afc866b9e43664d2601"
   },
   {
-    "balance": "$6,369.75",
+    "balance": "88219.99",
     "index": 36,
-    "uid": "5a2164d7957837aed371e86d"
+    "uid": "5a221afc74384e7ea533da8b"
   },
   {
-    "balance": "$27,224.85",
+    "balance": "65177.08",
     "index": 37,
-    "uid": "5a2164d70bdd0e622dc8d499"
+    "uid": "5a221afc738d2d6e6392d5dc"
   },
   {
-    "balance": "$40,646.28",
+    "balance": "29225.77",
     "index": 38,
-    "uid": "5a2164d78eb12272f994dcdc"
+    "uid": "5a221afc730b3ad1936f09c3"
   },
   {
-    "balance": "$50,691.12",
+    "balance": "61796.76",
     "index": 39,
-    "uid": "5a2164d7a1cdf755ba449895"
+    "uid": "5a221afc4a49487258595180"
   },
   {
-    "balance": "$42,108.23",
+    "balance": "5142.34",
     "index": 40,
-    "uid": "5a2164d7b9802d36ce7d1864"
+    "uid": "5a221afc2faabf12d9277c49"
   },
   {
-    "balance": "$20,845.74",
+    "balance": "66577.71",
     "index": 41,
-    "uid": "5a2164d7e15648c9dd9786f3"
+    "uid": "5a221afc35c86611716f93cb"
   },
   {
-    "balance": "$72,375.44",
+    "balance": "98610.92",
     "index": 42,
-    "uid": "5a2164d7936b8720f18fa164"
+    "uid": "5a221afcb7aa997b815835e6"
   },
   {
-    "balance": "$28,612.89",
+    "balance": "77750.57",
     "index": 43,
-    "uid": "5a2164d7f28e16fa1c2282bd"
+    "uid": "5a221afcd7c17a59776b49f8"
   },
   {
-    "balance": "$46,697.14",
+    "balance": "61558.59",
     "index": 44,
-    "uid": "5a2164d75617d362f54ad936"
+    "uid": "5a221afc6b44db79a2e5de2f"
   },
   {
-    "balance": "$69,864.43",
+    "balance": "41350.46",
     "index": 45,
-    "uid": "5a2164d73013e2a88999c2e1"
+    "uid": "5a221afc91beea263bdd29c2"
   },
   {
-    "balance": "$19,077.34",
+    "balance": "69710.50",
     "index": 46,
-    "uid": "5a2164d7a5a45d0ef612d46a"
+    "uid": "5a221afc0b1b01243f3f9316"
   },
   {
-    "balance": "$22,326.59",
+    "balance": "80359.98",
     "index": 47,
-    "uid": "5a2164d748d43a880f7fcdfe"
+    "uid": "5a221afc92bd36ed01e7db35"
   },
   {
-    "balance": "$44,397.87",
+    "balance": "34122.01",
     "index": 48,
-    "uid": "5a2164d7749d0cb5c3d298a1"
+    "uid": "5a221afc725fcb9c3f828824"
   },
   {
-    "balance": "$27,683.25",
+    "balance": "89754.37",
     "index": 49,
-    "uid": "5a2164d7a9c7e7723dc314d5"
+    "uid": "5a221afcd96c6c89b87655eb"
   },
   {
-    "balance": "$68,977.57",
+    "balance": "83108.43",
     "index": 50,
-    "uid": "5a2164d7634c11c61e1a144a"
+    "uid": "5a221afcf5e6035e46c45fbb"
   },
   {
-    "balance": "$60,674.43",
+    "balance": "32931.92",
     "index": 51,
-    "uid": "5a2164d795da76c9962c1326"
+    "uid": "5a221afc4703f397d91613fb"
   },
   {
-    "balance": "$12,067.36",
+    "balance": "51253.11",
     "index": 52,
-    "uid": "5a2164d7b8542e5932f74851"
+    "uid": "5a221afc8dd01e527da928e1"
   },
   {
-    "balance": "$83,288.39",
+    "balance": "25420.15",
     "index": 53,
-    "uid": "5a2164d7c8311ac4d47c3c69"
+    "uid": "5a221afc8bac6fc1f1dd182a"
   },
   {
-    "balance": "$70,198.03",
+    "balance": "61665.82",
     "index": 54,
-    "uid": "5a2164d725a39b3393ce0583"
+    "uid": "5a221afc77c820d681c71257"
   },
   {
-    "balance": "$3,940.93",
+    "balance": "11143.54",
     "index": 55,
-    "uid": "5a2164d7ca7594b77cc866f6"
+    "uid": "5a221afc403ba98efbd9728c"
   },
   {
-    "balance": "$43,804.95",
+    "balance": "23756.56",
     "index": 56,
-    "uid": "5a2164d77f210f9c82713768"
+    "uid": "5a221afc0c95ef6545bdf0a7"
   },
   {
-    "balance": "$11,709.53",
+    "balance": "66701.27",
     "index": 57,
-    "uid": "5a2164d74c55e0ee758a2e82"
+    "uid": "5a221afc37dc1f1eb26bebdf"
   },
   {
-    "balance": "$81,468.86",
+    "balance": "22094.83",
     "index": 58,
-    "uid": "5a2164d795a8246a02d92e25"
+    "uid": "5a221afc5840805d05d7b9f4"
   },
   {
-    "balance": "$25,945.92",
+    "balance": "83418.74",
     "index": 59,
-    "uid": "5a2164d77d681a3163e37a03"
+    "uid": "5a221afcf1273672b5950a33"
   },
   {
-    "balance": "$97,636.58",
+    "balance": "12779.67",
     "index": 60,
-    "uid": "5a2164d7834b6fdf9008bd62"
+    "uid": "5a221afc0f51f9f5b2dbbcf9"
   },
   {
-    "balance": "$178.19",
+    "balance": "30789.02",
     "index": 61,
-    "uid": "5a2164d798b9ad088acef25d"
+    "uid": "5a221afc6af1de1935ad3b70"
   },
   {
-    "balance": "$99,014.95",
+    "balance": "86067.98",
     "index": 62,
-    "uid": "5a2164d774648ecb8fc82a6c"
+    "uid": "5a221afc4c73e4c83474d589"
   },
   {
-    "balance": "$29,303.83",
+    "balance": "63235.86",
     "index": 63,
-    "uid": "5a2164d7d164c9b45c21104c"
+    "uid": "5a221afcb9a0ee290b959d40"
   },
   {
-    "balance": "$75,538.53",
+    "balance": "16700.42",
     "index": 64,
-    "uid": "5a2164d7e3a59558af3fa78e"
+    "uid": "5a221afc567b30f490833673"
   },
   {
-    "balance": "$90,308.58",
+    "balance": "42104.71",
     "index": 65,
-    "uid": "5a2164d7a7a25d18237d9058"
+    "uid": "5a221afc7e764f02f0fd8ebd"
   },
   {
-    "balance": "$89,582.54",
+    "balance": "62415.24",
     "index": 66,
-    "uid": "5a2164d76d2fd8687cb5054f"
+    "uid": "5a221afc35b38f9a0ba44b2c"
   },
   {
-    "balance": "$74,602.39",
+    "balance": "58024.39",
     "index": 67,
-    "uid": "5a2164d780debfdc01285093"
-  },
-  {
-    "balance": "$73,739.66",
-    "index": 68,
-    "uid": "5a2164d7423d7b9e44b772e1"
-  },
-  {
-    "balance": "$50,049.14",
-    "index": 69,
-    "uid": "5a2164d77f9364ca753d0eb3"
-  },
-  {
-    "balance": "$50,571.19",
-    "index": 70,
-    "uid": "5a2164d74723504f476c4b24"
-  },
-  {
-    "balance": "$55,208.54",
-    "index": 71,
-    "uid": "5a2164d7a6d1a55e06d8454f"
-  },
-  {
-    "balance": "$81,511.02",
-    "index": 72,
-    "uid": "5a2164d754512b95a4e33cc6"
-  },
-  {
-    "balance": "$64,422.62",
-    "index": 73,
-    "uid": "5a2164d7f54051e4d27fe9b4"
-  },
-  {
-    "balance": "$1,564.73",
-    "index": 74,
-    "uid": "5a2164d75b99a07e3172f6a4"
-  },
-  {
-    "balance": "$47,368.67",
-    "index": 75,
-    "uid": "5a2164d7cba25697d8a72777"
-  },
-  {
-    "balance": "$45,392.84",
-    "index": 76,
-    "uid": "5a2164d72fce1520baa498a2"
-  },
-  {
-    "balance": "$95,111.53",
-    "index": 77,
-    "uid": "5a2164d771b0b0d6bc2d32c9"
-  },
-  {
-    "balance": "$64,516.22",
-    "index": 78,
-    "uid": "5a2164d7fa948349bb2fa2e3"
-  },
-  {
-    "balance": "$60,521.23",
-    "index": 79,
-    "uid": "5a2164d793cb6796af336665"
-  },
-  {
-    "balance": "$58,389.46",
-    "index": 80,
-    "uid": "5a2164d7d7fe9e77234761ca"
-  },
-  {
-    "balance": "$79,960.00",
-    "index": 81,
-    "uid": "5a2164d7d25b71fca835c5d2"
-  },
-  {
-    "balance": "$61,080.48",
-    "index": 82,
-    "uid": "5a2164d75752614396ba0ff8"
+    "uid": "5a221afc496d8c520e4e9a97"
   }
 ]
