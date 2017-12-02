@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='dist_bank.proto',
   package='dist_bank',
   syntax='proto3',
-  serialized_pb=_b('\n\x0f\x64ist_bank.proto\x12\tdist_bank\"#\n\rLookUpRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\":\n\x0fWithdrawRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bwith_amount\x18\x02 \x01(\x02\"6\n\x0bSaveRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bsave_amount\x18\x02 \x01(\x02\"I\n\rBalanceRecord\x12\x17\n\x0fupdated_balance\x18\x01 \x01(\x02\x12\r\n\x05index\x18\x02 \x01(\x05\x12\x10\n\x08res_info\x18\x03 \x01(\t2\xd1\x01\n\x08\x44istBank\x12\x45\n\rLookUpAccount\x12\x18.dist_bank.LookUpRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12\x42\n\x08Withdraw\x12\x1a.dist_bank.WithdrawRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12:\n\x04Save\x12\x16.dist_bank.SaveRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0f\x64ist_bank.proto\x12\tdist_bank\"#\n\rLookUpRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\":\n\x0fWithdrawRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bwith_amount\x18\x02 \x01(\x02\"6\n\x0bSaveRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x13\n\x0bsave_amount\x18\x02 \x01(\x02\"N\n\rBalanceRecord\x12\x0b\n\x03uid\x18\x01 \x01(\t\x12\x0f\n\x07\x62\x61lance\x18\x02 \x01(\x02\x12\r\n\x05index\x18\x03 \x01(\x05\x12\x10\n\x08res_info\x18\x04 \x01(\t2\xd1\x01\n\x08\x44istBank\x12\x45\n\rLookUpAccount\x12\x18.dist_bank.LookUpRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12\x42\n\x08Withdraw\x12\x1a.dist_bank.WithdrawRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x12:\n\x04Save\x12\x16.dist_bank.SaveRequest\x1a\x18.dist_bank.BalanceRecord\"\x00\x62\x06proto3')
 )
 
 
@@ -140,22 +140,29 @@ _BALANCERECORD = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='updated_balance', full_name='dist_bank.BalanceRecord.updated_balance', index=0,
-      number=1, type=2, cpp_type=6, label=1,
+      name='uid', full_name='dist_bank.BalanceRecord.uid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='balance', full_name='dist_bank.BalanceRecord.balance', index=1,
+      number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='index', full_name='dist_bank.BalanceRecord.index', index=1,
-      number=2, type=5, cpp_type=1, label=1,
+      name='index', full_name='dist_bank.BalanceRecord.index', index=2,
+      number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='res_info', full_name='dist_bank.BalanceRecord.res_info', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      name='res_info', full_name='dist_bank.BalanceRecord.res_info', index=3,
+      number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -173,7 +180,7 @@ _BALANCERECORD = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=183,
-  serialized_end=256,
+  serialized_end=261,
 )
 
 DESCRIPTOR.message_types_by_name['LookUpRequest'] = _LOOKUPREQUEST
@@ -218,8 +225,8 @@ _DISTBANK = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=259,
-  serialized_end=468,
+  serialized_start=264,
+  serialized_end=473,
   methods=[
   _descriptor.MethodDescriptor(
     name='LookUpAccount',
