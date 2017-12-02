@@ -9,6 +9,8 @@ import dist_bank_pb2
 import dist_bank_pb2_grpc
 import dist_bank_resources
 
+from dist_bank_exceptions import *
+
 
 def bank_lookup_account(stub, request):
     """
@@ -18,7 +20,13 @@ def bank_lookup_account(stub, request):
     request: <class 'dist_bank_pb2.LookupRequest'
      return:
     """
-    raise NotImplementedError
+    print('In method bank_lookup_account:')
+    result = stub.LookUpAccount(request)
+    if result is None:
+        print("Unable to find record")
+        raise AccountNotExistError
+    print(result.uid, result.index, result.balance)
+    return result
 
 
 def bank_withdraw_money(stub, request):
@@ -55,8 +63,8 @@ def run():
     print("Naive test cases:\n")
 
     print("-------------- LookupAccount --------------")
-    bank_lookup_account(stub, dist_bank_pb2.LookupRequest(account_id="5a221afc35b38f9a0ba44b2c"))
-
+    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid="5a221afc35b38f9a0ba44b2c"))
+    """
 
     print("-------------- Save --------------")
     bank_withdraw_moneye(stub, dist_bank_pb2.WithdrawRequest(account_id="5a221afc35b38f9a0ba44b2c"),
@@ -65,11 +73,11 @@ def run():
     print("-------------- Withdraw --------------")
     bank_save_money(stub, dist_bank_pb2.SaveRequest(account_id="5a221afc35b38f9a0ba44b2c"),
                                                     save_amount=100.0)
-
+    """
 
 
 if __name__ == '__main__':
-  run()
+    run()
 
 
 """

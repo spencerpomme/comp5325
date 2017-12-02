@@ -52,7 +52,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         return: A BalanceRecord response (see dist_bank.proto)
         """
         print('Method LookUpAccount called:')
-        record = get_record(self.db, reqeust)
+        record = get_record(self.db, request)
         if record is None:
             return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
         else:
@@ -88,6 +88,7 @@ def serve():
         DistBankServicer(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
+    print('Server started.\n')
     try:
         while True:
             time.sleep(_ONE_DAY_IN_SECONDS)
