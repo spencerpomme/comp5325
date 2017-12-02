@@ -10,6 +10,11 @@ import dist_bank_resources
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
+# Below defines the res_infos:
+_SUCCESS_RETRIVAL = '1'
+_RECORD_NOT_EXIST = '0'
+
+
 def get_record(dist_bank_db, uid):
     """
     This helper function is used to get a record from the database.
@@ -46,7 +51,12 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         request: A LookUpRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        print('LookUpAccount')
+        print('Method LookUpAccount called:')
+        record = get_record(self.db, reqeust)
+        if record is None:
+            return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
+        else:
+            return record
 
 
     def Withdraw(self, request, context):
@@ -55,7 +65,9 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         request: A WithdrawRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        print('Withdraw')
+        print('Method Withdraw called:')
+
+
 
     def Save(self, request, context):
         """
@@ -63,7 +75,8 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         request: A SaveRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        print('Save')
+        print('Method Save called:')
+
 
 
 def serve():
