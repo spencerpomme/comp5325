@@ -21,7 +21,8 @@ def bank_lookup_account(stub, request):
      return:
     """
     print('In method bank_lookup_account:')
-    result = stub.LookUpAccount(request)
+    result = stub.LookUpAccount(request) # <-- remember to check whether port is occupied!
+
     if result is None:
         print("Unable to find record")
         raise AccountNotExistError

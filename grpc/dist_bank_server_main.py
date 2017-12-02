@@ -15,18 +15,18 @@ _SUCCESS_RETRIVAL = '1'
 _RECORD_NOT_EXIST = '0'
 
 
-def get_record(dist_bank_db, uid):
+def get_record(dist_bank_db, request):
     """
     This helper function is used to get a record from the database.
     If record does not exist, then return None. Further operation on this will
     be dealt with by outer scope function which calls this helper function.
 
     dist_bank_db: list, self.db
-             uid: string, user account number
+         request: message LookUpRequest
           return: message BalanceRecord
     """
     for record in dist_bank_db:
-        if record.uid == uid:
+        if record.uid == request.uid:
             return record
     return None
 
@@ -66,6 +66,11 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         return: A BalanceRecord response (see dist_bank.proto)
         """
         print('Method Withdraw called:')
+        record = get_record(self.db, request)
+        if record is None:
+            return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
+        else:
+
 
 
 
