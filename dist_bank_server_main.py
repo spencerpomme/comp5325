@@ -10,6 +10,22 @@ import dist_bank_resources
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
+def get_record(dist_bank_db, uid):
+    """
+    This helper function is used to get a record from the database.
+    If record does not exist, then return None. Further operation on this will
+    be dealt with by outer scope function which calls this helper function.
+
+    dist_bank_db: list, self.db
+             uid: string, user account number
+          return: message BalanceRecord
+    """
+    for record in dist_bank_db:
+        if record.uid == uid:
+            return record
+    return None
+
+
 class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
     """
     Provides methods that implement functionality of dist bank server.
@@ -19,8 +35,9 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         Load account data
         """
         self.db = dist_bank_resources.read_dist_bank_database()
-        print(type(self.db))
-        print(self.db)
+        # print(type(self.db))    <-- type: <class 'list'>
+        # print(type(self.db[0])) <-- type: <class 'dist_bank_pb2.BalanceRecord'>
+        # print(self.db)
 
     # TODO: Implement other methods.
     def LookUpAccount(self, request, context):
