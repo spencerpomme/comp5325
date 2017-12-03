@@ -32,7 +32,7 @@ def read_dist_bank_database():
     return record_list
 
 
-def modify_dist_bank_database_withdraw(request): # NOT DONE YET!
+def modify_dist_bank_database_withdraw(request):
     """
     Modifies dist bank database upon withdraw operation.
 
@@ -40,23 +40,25 @@ def modify_dist_bank_database_withdraw(request): # NOT DONE YET!
     request: <class 'dist_bank_pb2.WithdrawRequest'> or <class 'dist_bank_pb2.SaveRequest'>
     returns: bool
     """
-    with open("dist_bank_db.json") as dist_bank_db_file:
+    try:
+        dist_bank_db_file = open("dist_bank_db.json", "r")
         db = json.load(dist_bank_db_file)
-        for item in db:
-            if item["uid"] == request.uid:
-                if float(item["balance"]) >= request.with_amount:
-                    print("Before withdraw operation:")
-                    print(item)
-                    print("After withdraw operation:")
-                    item.update({"balance": str(float(item["balance"]) - request.with_amount)})
-                    print(item)
+        # print('bf wd-->', db[0])
+        for i in range(len(db)):
+            if db[i]["uid"] == request.uid:
+                if float(db[i]["balance"]) >= request.with_amount:
+                    db[i].update({"balance": str(float(db[i]["balance"]) - request.with_amount)})
+                    break
                 else:
                     return _NOT_ENOUGH_MONEY
+        # print('af wd-->', db[0])
+        dist_bank_db_file.close()
+        dist_bank_db_file = open("dist_bank_db.json", "w")
+        json.dump(db, dist_bank_db_file)
+    finally:
+        dist_bank_db_file.close()
 
-            else:
-                return _MODIFICATION_ERR
-
-def modify_dist_bank_database_save(request): # NOT DONE YEt!
+def modify_dist_bank_database_save(request):
     """
     Modifies dist bank database upon save operation.
 
@@ -67,12 +69,11 @@ def modify_dist_bank_database_save(request): # NOT DONE YEt!
     try:
         dist_bank_db_file = open("dist_bank_db.json", "r")
         db = json.load(dist_bank_db_file)
-        print('bf-->', db[0])
+        # print('bf sv-->', db[0])
         for i in range(len(db)):
             if db[i]["uid"] == request.uid:
                 db[i].update({"balance": str(float(db[i]["balance"]) + request.save_amount)})
-                # print(new_db[i])
-        print('af-->', db[0])
+        # print('af sv-->', db[0])
         dist_bank_db_file.close()
         dist_bank_db_file = open("dist_bank_db.json", "w")
         json.dump(db, dist_bank_db_file)
@@ -82,6 +83,10 @@ def modify_dist_bank_database_save(request): # NOT DONE YEt!
 
 if __name__ == "__main__":
 
-    #modify_dist_bank_database_withdraw(dist_bank_pb2.WithdrawRequest(uid="5a221afc4fcb9e8932acaf8b", with_amount=94274.05))
-    print('\n\n')
+    import time
+    print("Testing withdraw: ")
+    modify_dist_bank_database_withdraw(dist_bank_pb2.WithdrawRequest(uid="5a221afc4fcb9e8932acaf8b", with_amount=94274.05))
+    print('\n')
+    time.sleep(5)
+    print("Testing save: ")
     modify_dist_bank_database_save(dist_bank_pb2.SaveRequest(uid="5a221afc4fcb9e8932acaf8b", save_amount=94274.05))
