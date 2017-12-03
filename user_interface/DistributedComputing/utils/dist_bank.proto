@@ -1,0 +1,49 @@
+// proto for distributed bank
+// dist_bank.proto
+// IMPORTANT!!
+// You can use this .proto file to generate classes in your preffered luanguage
+
+// using version 3
+syntax = "proto3";
+
+package dist_bank;
+
+// definition of the service
+service DistBank {
+    rpc LookUpAccount (LookUpRequest) returns (BalanceRecord) {}
+    rpc Withdraw (WithdrawRequest) returns (BalanceRecord) {}
+    rpc Save(SaveRequest) returns (BalanceRecord) {}
+}
+
+// Look up account balance request.
+// The account id of the client, must be provided.
+message LookUpRequest {
+    string uid = 1;
+}
+
+// Withdraw money request.
+// The account id of the client, must be provided.
+message WithdrawRequest {
+    string uid = 1;
+    float with_amount = 2;
+}
+
+
+// Save money request.
+// The account id of the client, must be provided.
+message SaveRequest {
+    string uid = 1;
+    float save_amount = 2;
+}
+
+// Reply message for above requests
+// String info saying whether the request is successful and
+// float number update_balance tell the updated account balance
+// int number index for faster search.
+// If account does not exist, only fail res_info will be replied.
+message BalanceRecord {
+    string uid = 1;
+    float balance = 2;
+    int32 index = 3;
+    string res_info = 4;
+}

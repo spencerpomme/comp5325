@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from bank.views import SearchAccountView
+from bank.views import IndexView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^search_account/$', SearchAccountView.as_view(), name='search_account')
+    url(r'^$', IndexView.as_view(), name="index"),
 ]

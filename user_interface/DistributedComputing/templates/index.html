@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load staticfiles %}
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,18 +12,18 @@
     <title>IBank</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="../static/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="{% static 'bootstrap/dist/css/bootstrap-theme.min.css' %}" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../static/bootstrap/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="{% static 'bootstrap/docs/assets/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../static/bootstrap/docs/examples/theme/theme.css" rel="stylesheet">
+    <link href="{% static 'bootstrap/docs/examples/theme/theme.css' %}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../static/bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="{% static 'bootstrap/docs/assets/js/ie-emulation-modes-warning.js' %}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,55 +34,31 @@
 
   <body>
 
-    <!-- Fixed navbar -->
-{#    <nav class="navbar navbar-inverse navbar-fixed-top">#}
-{#      <div class="container">#}
-{#        <div class="navbar-header">#}
-{#          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">#}
-{#            <span class="sr-only">Toggle navigation</span>#}
-{#            <span class="icon-bar"></span>#}
-{#            <span class="icon-bar"></span>#}
-{#            <span class="icon-bar"></span>#}
-{#          </button>#}
-{#          <a class="navbar-brand" href="#">Bootstrap theme</a>#}
-{#        </div>#}
-{#        <div id="navbar" class="navbar-collapse collapse">#}
-{#          <ul class="nav navbar-nav">#}
-{#            <li class="active"><a href="#">Home</a></li>#}
-{#            <li><a href="#about">About</a></li>#}
-{#            <li><a href="#contact">Contact</a></li>#}
-{#            <li class="dropdown">#}
-{#              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>#}
-{#              <ul class="dropdown-menu">#}
-{#                <li><a href="#">Action</a></li>#}
-{#                <li><a href="#">Another action</a></li>#}
-{#                <li><a href="#">Something else here</a></li>#}
-{#                <li role="separator" class="divider"></li>#}
-{#                <li class="dropdown-header">Nav header</li>#}
-{#                <li><a href="#">Separated link</a></li>#}
-{#                <li><a href="#">One more separated link</a></li>#}
-{#              </ul>#}
-{#            </li>#}
-{#          </ul>#}
-{#        </div><!--/.nav-collapse -->#}
-{#      </div>#}
-{#    </nav>#}
-
-
     <div class="container theme-showcase" role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>CurrentID:<span id="id">{{ id }}</span></h1>
-          <h2>Balance:<span id="balance">{{ balance }}</span></h2>
+        <h2>Current ID:      <span id="id" style="font-style: italic">{{ id }}</span></h2>
+        <h2>Balance:      <span id="balance" style="color: #cc102d; font-style: italic">{{ balance }}</span></h2>
 
       </div>
+
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>No Enough Balance!</strong>
+        </div>
+
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Opeartion Success!</strong>
+        </div>
+
       <p>
         <div class="input-group">
             <input type="text" id='user_id' class="form-control ui" placeholder="User ID" aria-describedby="basic-addon2">
         </div>
         <br>
-        <button type="button" class="btn btn-primary search" href="{% url 'search_account' %}?type=lu">Look Up</button>
+        <button type="button" class="btn btn-primary search" href="{% url 'index' %}?type=lu">Look Up</button>
       </p>
 
       <p>
@@ -89,7 +66,7 @@
             <input type="text" id='save_amount' class="form-control" placeholder="Amount" aria-describedby="basic-addon2">
         </div>
         <br>
-        <button type="button" class="btn btn-primary save" href="{% url 'search_account' %}？type=sm">Save Money</button>
+        <button type="button" class="btn btn-primary save" href="{% url 'index' %}？type=sm">Save Money</button>
       </p>
 
       <p>
@@ -97,7 +74,7 @@
             <input type="text" id='withdraw_amount' class="form-control" placeholder="Amount" aria-describedby="basic-addon2">
         </div>
         <br>
-        <button type="button" class="btn btn-primary withdraw" href="{% url 'search_account' %}?type=wd">Withdraw</button>
+        <button type="button" class="btn btn-primary withdraw" href="{% url 'index' %}?type=wd">Withdraw</button>
       </p>
 
 
@@ -110,18 +87,18 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../static/bootstrap/docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../static/bootstrap/docs/dist/js/bootstrap.min.js"></script>
-    <script src="../static/bootstrap/docs/assets/js/docs.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{% static 'bootstrap/docs/assets/js/vendor/jquery.min.js' %}"><\/script>')</script>
+    <script src="{% static 'bootstrap/docs/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bootstrap/docs/assets/js/docs.min.js' %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../static/bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="{% static 'bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js' %}"></script>
 
     <script type="text/javascript">
         function opearte(current_elem, type, id, amount){
             $.ajax({
                 cache: false,
                 type: "POST",
-                url:"{% url 'search_account' %}",
+                url:"{% url 'index' %}",
                 data:{'id':id, 'type': type, 'amount': amount},
                 async: true,
                 <!--需要将csrf_token传到request的header里，否则无法通过验证-->
@@ -149,9 +126,11 @@
         $('.search').on('click', function(){
             opearte($(this), 'search', $('#user_id').val(), 0);
         });
+
         $('.save').on('click', function(){
             opearte($(this), 'save', $('#user_id').val(), $('#save_amount').val());
         });
+
         $('.withdraw').on('click', function(){
             opearte($(this), 'withdraw', $('#user_id').val(), $('#withdraw_amount').val());
         });
