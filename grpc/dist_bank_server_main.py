@@ -58,6 +58,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         return: A BalanceRecord response (see dist_bank.proto)
         """
         print('Method LookUpAccount called:')
+        self.update_db()
         record = get_record(self.db, request)
         if record is None:
             return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
@@ -72,6 +73,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         return: A BalanceRecord response (see dist_bank.proto)
         """
         print('Method Withdraw called:')
+        self.update_db()
         record = get_record(self.db, request)
         if record is None:
             return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
@@ -94,6 +96,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         return: A BalanceRecord response (see dist_bank.proto)
         """
         print('Method Save called:')
+        self.update_db()
         record = get_record(self.db, request)
         if record is None:
             return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
@@ -106,6 +109,13 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
             else:
                 print('res_flag: ', res_flag)
                 raise DatabaseOptFailure
+
+    def update_db(self):
+        """
+        Update after modification
+        """
+        self.db = dist_bank_resources.read_dist_bank_database()
+
 
 
 
