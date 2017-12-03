@@ -15,6 +15,11 @@ _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 _SUCCESS_RETRIVAL = '1'
 _RECORD_NOT_EXIST = '0'
 
+# DB modification flags send from dist_bank_resources
+_SUCCESS_MODIFIED = 0
+_MODIFICATION_ERR = 1
+_NOT_ENOUGH_MONEY = 2
+
 
 def get_record(dist_bank_db, request):
     """
@@ -71,13 +76,13 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         if record is None:
             return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
         else:
-            res_sig = dist_bank_resources.modify_dist_bank_database_withdraw(request)
-            if res_sig == _SUCCESS_RETRIVAL:
-                # If res_sig is success, then construct a LookUpRequest to look up modified record:
+            res_flag = dist_bank_resources.modify_dist_bank_database_withdraw(request)
+            if res_flag == _SUCCESS_MODIFIED:
+                # If res_flag is success, then construct a LookUpRequest to look up modified record:
                 look_up_request = dist_bank_pb2.LookUpRequest(uid=request.uid)
                 return get_record(self.db, look_up_request)
             else:
-                print(res_sig)
+                print('res_flag: ', res_flag)
                 raise DatabaseOptFailure
 
 
@@ -89,6 +94,18 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         return: A BalanceRecord response (see dist_bank.proto)
         """
         print('Method Save called:')
+        record = get_record(self.db, request)
+        if record is None:
+            return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
+        else:
+            res_flag = dist_bank_resources.modify_dist_bank_database_save(request)
+            if res_flag == _SUCCESS_MODIFIED:
+                # If res_flag is success, then construct a LookUpRequest to look up modified record:
+                look_up_request = dist_bank_pb2.LookUpRequest(uid=request.uid)
+                return get_record(self.db, look_up_request)
+            else:
+                print('res_flag: ', res_flag)
+                raise DatabaseOptFailure
 
 
 

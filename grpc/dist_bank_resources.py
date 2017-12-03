@@ -43,7 +43,7 @@ def modify_dist_bank_database_withdraw(request):
     try:
         dist_bank_db_file = open("dist_bank_db.json", "r")
         db = json.load(dist_bank_db_file)
-        # print('bf wd-->', db[0])
+        print('bf wd-->', db[66])
         for i in range(len(db)):
             if db[i]["uid"] == request.uid:
                 if float(db[i]["balance"]) >= request.with_amount:
@@ -51,7 +51,7 @@ def modify_dist_bank_database_withdraw(request):
                     break
                 else:
                     return _NOT_ENOUGH_MONEY
-        # print('af wd-->', db[0])
+        print('af wd-->', db[66])
         dist_bank_db_file.close()
         dist_bank_db_file = open("dist_bank_db.json", "w")
         json.dump(db, dist_bank_db_file)
@@ -73,11 +73,11 @@ def modify_dist_bank_database_save(request):
     try:
         dist_bank_db_file = open("dist_bank_db.json", "r")
         db = json.load(dist_bank_db_file)
-        # print('bf sv-->', db[0])
+        print('bf sv-->', db[0])
         for i in range(len(db)):
             if db[i]["uid"] == request.uid:
                 db[i].update({"balance": str(float(db[i]["balance"]) + request.save_amount)})
-        # print('af sv-->', db[0])
+        print('af sv-->', db[0])
         dist_bank_db_file.close()
         dist_bank_db_file = open("dist_bank_db.json", "w")
         json.dump(db, dist_bank_db_file)
