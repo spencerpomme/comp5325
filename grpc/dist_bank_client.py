@@ -75,6 +75,7 @@ def run():
     print("-------------- withdraw --------------")
     bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid="5a221afc35b38f9a0ba44b2c", with_amount=100.0))
 
+
     print("-------------- save --------------")
     bank_save_money(stub, dist_bank_pb2.SaveRequest(uid="5a221afc35b38f9a0ba44b2c", save_amount=100.0))
 
