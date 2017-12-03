@@ -26,7 +26,7 @@ def bank_lookup_account(stub, request):
     if result is None:
         print("Unable to find record")
         raise AccountNotExistError
-    print(result.uid, result.index, result.balance)
+    print(result)
     return result
 
 
@@ -73,7 +73,7 @@ def run():
 
 
     print("-------------- withdraw --------------")
-    bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid="5a221afc35b38f9a0ba44b2c", with_amount=100.0))
+    bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid="5a221afc35b38f9a0ba44b2c", with_amount=200.0))
 
 
     print("-------------- save --------------")
