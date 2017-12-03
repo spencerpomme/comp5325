@@ -2,6 +2,7 @@
 # The main server of the service.
 
 from concurrent import futures
+from dist_bank_exceptions import *
 import time
 import grpc
 import dist_bank_pb2_grpc
@@ -70,7 +71,14 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         if record is None:
             return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
         else:
-
+            res_sig = dist_bank_resources.modify_dist_bank_database_withdraw(request)
+            if res_sig == _SUCCESS_RETRIVAL:
+                # If res_sig is success, then construct a LookUpRequest to look up modified record:
+                look_up_request = dist_bank_pb2.LookUpRequest(uid=request.uid)
+                return get_record(self.db, look_up_request)
+            else:
+                print(res_sig)
+                raise DatabaseOptFailure
 
 
 
