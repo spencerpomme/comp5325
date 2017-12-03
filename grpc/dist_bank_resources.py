@@ -55,6 +55,10 @@ def modify_dist_bank_database_withdraw(request):
         dist_bank_db_file.close()
         dist_bank_db_file = open("dist_bank_db.json", "w")
         json.dump(db, dist_bank_db_file)
+    except:
+        return _MODIFICATION_ERR
+    else:
+        return _SUCCESS_MODIFIED
     finally:
         dist_bank_db_file.close()
 
@@ -77,6 +81,10 @@ def modify_dist_bank_database_save(request):
         dist_bank_db_file.close()
         dist_bank_db_file = open("dist_bank_db.json", "w")
         json.dump(db, dist_bank_db_file)
+    except:
+        return _MODIFICATION_ERR
+    else:
+        return _SUCCESS_MODIFIED
     finally:
         dist_bank_db_file.close()
 
