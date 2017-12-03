@@ -20,9 +20,9 @@ def bank_lookup_account(stub, request):
     request: <class 'dist_bank_pb2.LookupRequest'
      return:
     """
-    print('In method bank_lookup_account:')
+    print("In method bank_lookup_account:")
     result = stub.LookUpAccount(request) # <-- remember to check whether port is occupied!
-
+    # from line 26 to 28 seem never gonna be reached!
     if result is None:
         print("Unable to find record")
         raise AccountNotExistError
@@ -38,7 +38,10 @@ def bank_withdraw_money(stub, request):
     request: <class 'dist_bank_pb2.WithdrawRequest'
      return:
     """
-    raise NotImplementedError
+    print("In method bank_withdraw_money:")
+    result = stub.Withdraw(request)
+    print(result)
+    return result
 
 
 def bank_save_money(stub, request):
@@ -68,7 +71,7 @@ def run():
     """
 
     print("-------------- Save --------------")
-    bank_withdraw_moneye(stub, dist_bank_pb2.WithdrawRequest(account_id="5a221afc35b38f9a0ba44b2c"),
+    bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(account_id="5a221afc35b38f9a0ba44b2c"),
                                                              with_amount=100.0)
 
     print("-------------- Withdraw --------------")
