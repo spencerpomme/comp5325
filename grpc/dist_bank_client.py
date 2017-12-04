@@ -115,6 +115,7 @@ def withdraw_wrapper(request):
 def save_wrpper(request):
     global stub
     stub = server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
+    print(stub)
     res = bank_save_money(stub, request)
     return res
 
@@ -128,17 +129,17 @@ def run(t_uid="5a221afc35b38f9a0ba44b2c"):
     for i in range(10):
         print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
 
-        print("------------------- withdraw --------------")
-        print(withdraw_wrapper(dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=2000000.0)))
+        # print("------------------- withdraw --------------")
+        # print(withdraw_wrapper(dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=2000000.0)))
 
-        print("-------------- LookupAccount --------------")
-        print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
+        # print("-------------- LookupAccount --------------")
+        # print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
 
         print("------------------ save -------------------")
         print(save_wrpper(dist_bank_pb2.SaveRequest(uid=t_uid, save_amount=100.0)))
 
-        print("-------------- LookupAccount --------------")
-        print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
+        # print("-------------- LookupAccount --------------")
+        # print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
         time.sleep(3)
 
 

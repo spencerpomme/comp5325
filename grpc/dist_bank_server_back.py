@@ -153,7 +153,7 @@ def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     dist_bank_pb2_grpc.add_DistBankServicer_to_server(
         DistBankServicer(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port('[::]:50052')
     server.start()
     print(dir(server))
     print('Server started.\n')
