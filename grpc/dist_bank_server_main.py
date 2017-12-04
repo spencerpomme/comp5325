@@ -136,5 +136,8 @@ def serve():
         server.stop(0)
 
 
+# Need a request director to redirect connection to other server when this server fails.
+
+
 if __name__ == '__main__':
     serve()
