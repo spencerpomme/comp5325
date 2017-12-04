@@ -6,7 +6,6 @@ The balance data json utiliztion code.
 import json
 # import dist_bank_pb2
 # from dist_bank_exceptions import *
-
 from . import dist_bank_pb2
 from .dist_bank_exceptions import *
 
@@ -92,7 +91,9 @@ def modify_dist_bank_database_save(request):
         dist_bank_db_file.close()
 
 
+
 if __name__ == "__main__":
+
 
     import time
     print("Testing withdraw: ")
