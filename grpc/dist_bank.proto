@@ -64,7 +64,7 @@ message Status {
 }
 
 // QueuedOperations. Used to synchronize between two servers.
-messsge QueuedOperation {
+message QueuedOperation {
     oneof requests {
         LookUpRequest look_up_req = 1;
         WithdrawRequest withdraw_req = 2;
