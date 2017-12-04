@@ -42,7 +42,7 @@ def bank_withdraw_money(stub, request):
     try:
         result = stub.Withdraw(request)
     except DatabaseOptFailure:
-        return "Server side operation failure."
+        return "IO_Failure"
     return result
 
 
@@ -58,7 +58,7 @@ def bank_save_money(stub, request):
     try:
         result = stub.Save(request)
     except DatabaseOptFailure:
-        return "Server side operation failure."
+        return "IO_Failure"
     return result
 
 
