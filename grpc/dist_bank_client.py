@@ -15,6 +15,9 @@ from dist_bank_exceptions import *
 PORTS = ['localhost:50051', 'localhost:50052']
 ALIVE = 0
 
+channel = grpc.insecure_channel('localhost:50051')
+stub = dist_bank_pb2_grpc.DistBankStub(channel)
+
 def bank_lookup_account(stub, request):
     """
     Client side method to request a lookup operation.
@@ -24,7 +27,6 @@ def bank_lookup_account(stub, request):
      return:
     """
     # print("In method bank_lookup_account:")
-    server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
     result = stub.LookUpAccount(request) # <-- remember to check whether port is occupied!
     # from line 26 to 28 seem never gonna be reached!
     if result is None:
@@ -43,7 +45,7 @@ def bank_withdraw_money(stub, request):
      return:
     """
     # print("In method bank_withdraw_money:")
-    server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
+
     try:
         result = stub.Withdraw(request)
     except DatabaseOptFailure:
@@ -60,7 +62,7 @@ def bank_save_money(stub, request):
      return:
     """
     # print("In method bank_withdraw_money:")
-    server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
+
     try:
         result = stub.Save(request)
     except DatabaseOptFailure:
@@ -76,10 +78,10 @@ def server_prober(stub, request):
     try:
         status = stub.ProbeStatus(request)
     except Exception as e:
-        shift_server()
-        return 0
+        new_stub = shift_server()
+        return new_stub
     else:
-        return 1
+        return stub
 
 
 def shift_server():
@@ -93,11 +95,28 @@ def shift_server():
         ALIVE = 0
     channel = grpc.insecure_channel(PORTS[ALIVE])
     stub = dist_bank_pb2_grpc.DistBankStub(channel)
+    return stub
 
 
 
 
+def look_up_wrapper(request):
+    global stub
+    stub = server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
+    res = bank_lookup_account(stub, request)
+    return res
 
+def withdraw_wrapper(request):
+    global stub
+    stub = server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
+    res = bank_withdraw_money(stub, request)
+    return res
+
+def save_wrpper(request):
+    global stub
+    stub = server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
+    res = bank_save_money(stub, request)
+    return res
 
 
 
@@ -105,24 +124,22 @@ def run(t_uid="5a221afc35b38f9a0ba44b2c"):
     """
     Simple client runability tests.
     """
-    print('FUCK')
-    channel = grpc.insecure_channel('localhost:50051')
-    stub = dist_bank_pb2_grpc.DistBankStub(channel)
 
-    print("-------------- LookupAccount --------------")
-    print(bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid)))
+    for i in range(10):
+        print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
 
-    print("------------------- withdraw --------------")
-    print(bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=2000000.0)))
+        print("------------------- withdraw --------------")
+        print(withdraw_wrapper(dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=2000000.0)))
 
-    print("-------------- LookupAccount --------------")
-    print(bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid)))
+        print("-------------- LookupAccount --------------")
+        print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
 
-    print("------------------ save -------------------")
-    print(bank_save_money(stub, dist_bank_pb2.SaveRequest(uid=t_uid, save_amount=100.0)))
+        print("------------------ save -------------------")
+        print(save_wrpper(dist_bank_pb2.SaveRequest(uid=t_uid, save_amount=100.0)))
 
-    print("-------------- LookupAccount --------------")
-    print(bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid)))
+        print("-------------- LookupAccount --------------")
+        print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
+        time.sleep(3)
 
 
 if __name__ == '__main__':

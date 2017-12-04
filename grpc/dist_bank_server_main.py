@@ -20,6 +20,10 @@ _NOT_ENOUGH_MONEY = '2'
 _SUCCESS_MODIFIED = 0
 _MODIFICATION_ERR = 1
 
+# connection to the other server
+channel = grpc.insecure_channel('localhost:50052')
+stub = dist_bank_pb2_grpc.DistBankStub(channel)
+
 
 
 def get_record(dist_bank_db, request):
