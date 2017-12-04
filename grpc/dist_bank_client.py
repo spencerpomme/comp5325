@@ -25,7 +25,7 @@ def bank_lookup_account(stub, request):
     # from line 26 to 28 seem never gonna be reached!
     if result is None:
         print("Unable to find record")
-        raise AccountNotExistError
+        # raise AccountNotExistError
     print(result)
     return result
 
