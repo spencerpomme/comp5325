@@ -7,12 +7,6 @@ import grpc
 from utils import dist_bank_client, dist_bank_pb2_grpc, dist_bank_pb2
 
 
-def get_stub():
-    channel = grpc.insecure_channel('localhost:50051')
-    stub = dist_bank_pb2_grpc.DistBankStub(channel)
-    return stub
-
-
 class IndexView(View):
     def get(self, request):
 
@@ -35,7 +29,7 @@ class IndexView(View):
         #  搜索用户
         if type_ == 'search':
 
-            result = dist_bank_client.bank_lookup_account(get_stub(), dist_bank_pb2.LookUpRequest(uid=id))
+            result = dist_bank_client.look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=id))
 
             # 该ID 不存在
             if result.uid == "0":
@@ -52,7 +46,7 @@ class IndexView(View):
         # 存钱
         if type_ == 'save':
 
-            result = dist_bank_client.bank_lookup_account(get_stub(), dist_bank_pb2.LookUpRequest(uid=id))
+            result = dist_bank_client.look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=id))
 
             # 该ID 不存在
             if result.uid == "0":
@@ -61,8 +55,8 @@ class IndexView(View):
 
             amount = request.POST.get('amount', 0)
 
-            result = dist_bank_client.bank_save_money(get_stub(), dist_bank_pb2.SaveRequest(uid=id,
-                                                                                      save_amount=float(amount)))
+            result = dist_bank_client.save_wrapper(dist_bank_pb2.SaveRequest(uid=id,
+                                                                             save_amount=float(amount)))
 
             print(result.index)
 
@@ -76,7 +70,7 @@ class IndexView(View):
         # 提现
         if type_ == 'withdraw':
 
-            result = dist_bank_client.bank_lookup_account(get_stub(), dist_bank_pb2.LookUpRequest(uid=id))
+            result = dist_bank_client.look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=id))
 
             # 该ID 不存在
             if result.uid == "0":
@@ -85,8 +79,8 @@ class IndexView(View):
 
             amount = request.POST.get('amount', 0)
 
-            result = dist_bank_client.bank_withdraw_money(get_stub(), dist_bank_pb2.WithdrawRequest(uid=id,
-                                                                                              with_amount=float(amount)))
+            result = dist_bank_client.withdraw_wrapper(gdist_bank_pb2.WithdrawRequest(uid=id,
+                                                                                      with_amount=float(amount)))
 
             # 余额不足
             if result.index == -1:
