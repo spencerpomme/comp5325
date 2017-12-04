@@ -118,7 +118,6 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
 
 
 
-
 def serve():
     """
     Initial server framework. Need further modifications!
@@ -137,7 +136,5 @@ def serve():
 
 
 # Need a request director to redirect connection to other server when this server fails.
-
-
 if __name__ == '__main__':
     serve()
