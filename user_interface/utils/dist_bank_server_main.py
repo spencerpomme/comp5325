@@ -89,7 +89,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
                 return get_record(self.db, look_up_request)
             else:
                 print('res_flag: ', res_flag)
-                raise DatabaseOptFailure
+                return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
 
 
 
@@ -112,14 +112,13 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
                 return get_record(self.db, look_up_request)
             else:
                 print('res_flag: ', res_flag)
-                raise DatabaseOptFailure
+                return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
 
     def update_db(self):
         """
         Update after modification
         """
         self.db = dist_bank_resources.read_dist_bank_database()
-
 
 
 
@@ -140,5 +139,6 @@ def serve():
         server.stop(0)
 
 
+# Need a request director to redirect connection to other server when this server fails.
 if __name__ == '__main__':
     serve()

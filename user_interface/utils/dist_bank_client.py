@@ -25,13 +25,13 @@ def bank_lookup_account(stub, request):
     request: <class 'dist_bank_pb2.LookupRequest'
      return:
     """
-    print("In method bank_lookup_account:")
+    # print("In method bank_lookup_account:")
     result = stub.LookUpAccount(request) # <-- remember to check whether port is occupied!
     # from line 26 to 28 seem never gonna be reached!
     if result is None:
-        print("Unable to find record")
+        # return "Unable to find record"
         raise AccountNotExistError
-    print(result)
+    # print(result)
     return result
 
 
@@ -43,9 +43,11 @@ def bank_withdraw_money(stub, request):
     request: <class 'dist_bank_pb2.WithdrawRequest'
      return:
     """
-    print("In method bank_withdraw_money:")
-    result = stub.Withdraw(request)
-    print(result)
+    # print("In method bank_withdraw_money:")
+    try:
+        result = stub.Withdraw(request)
+    except DatabaseOptFailure:
+        raise DatabaseOptFailure
     return result
 
 
@@ -57,15 +59,17 @@ def bank_save_money(stub, request):
     request: <class 'dist_bank_pb2.SaveRequest'
      return:
     """
-    print("In method bank_withdraw_money:")
-    result = stub.Save(request)
-    print(result)
+    # print("In method bank_withdraw_money:")
+    try:
+        result = stub.Save(request)
+    except DatabaseOptFailure:
+        return "IO_Failure"
     return result
 
 
 
 
-def run():
+def run(t_uid="5a221afc35b38f9a0ba44b2c"):
     """
     Simple client runability tests.
     """
@@ -73,31 +77,20 @@ def run():
     stub = dist_bank_pb2_grpc.DistBankStub(channel)
 
     print("-------------- LookupAccount --------------")
-    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid="5a221afc35b38f9a0ba44b2c"))
+    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid))
 
     print("-------------- withdraw --------------")
-    bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid="5a221afc35b38f9a0ba44b2c", with_amount=200.0))
+    bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=200.0))
 
     print("-------------- LookupAccount --------------")
-    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid="5a221afc35b38f9a0ba44b2c"))
+    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid))
 
     print("-------------- save --------------")
-    bank_save_money(stub, dist_bank_pb2.SaveRequest(uid="5a221afc35b38f9a0ba44b2c", save_amount=100.0))
+    bank_save_money(stub, dist_bank_pb2.SaveRequest(uid=t_uid, save_amount=100.0))
 
     print("-------------- LookupAccount --------------")
-    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid="5a221afc35b38f9a0ba44b2c"))
+    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid))
 
 
 if __name__ == '__main__':
     run()
-
-
-"""
-The target test data:
-{
-
-    "balance": "62415.24",
-    "index": 66,
-    "uid": "5a221afc35b38f9a0ba44b2c"
-  }
-"""

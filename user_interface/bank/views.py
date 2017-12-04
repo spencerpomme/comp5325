@@ -1,10 +1,16 @@
-#encoding: utf-8
+# encoding: utf-8
 from django.shortcuts import render
 from django.views.generic import View
 from django.http import HttpResponse
 import json
 import grpc
 from utils import dist_bank_client, dist_bank_pb2_grpc, dist_bank_pb2
+
+
+def get_stub():
+    channel = grpc.insecure_channel('localhost:50051')
+    stub = dist_bank_pb2_grpc.DistBankStub(channel)
+    return stub
 
 
 class IndexView(View):
@@ -17,19 +23,27 @@ class IndexView(View):
     def post(self, request):
 
         type_ = request.POST.get('type', '')
-        id = request.POST.get("id", 0)
+        id = request.POST.get("id", "")
         amount = request.POST.get('amount', 0)
+
+        # 检查是否为数字
+        try:
+            amount = float(amount)
+        except:
+            return HttpResponse('{"status":"fail", "type":"ValueError"}', content_type="application/json")
 
         #  搜索用户
         if type_ == 'search':
-            # invoke the function here
 
-            channel = grpc.insecure_channel('localhost:50051')
-            stub = dist_bank_pb2_grpc.DistBankStub(channel)
+            result = dist_bank_client.bank_lookup_account(get_stub(), dist_bank_pb2.LookUpRequest(uid=id))
 
-            result = dist_bank_client.bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=id))
+            # 该ID 不存在
+            if result.uid == "0":
+                return HttpResponse('{"status":"fail", "type":"NoID"}',
+                                    content_type="application/json")
+
             balance = result.balance
-
+            uid_exist = True
             dicts = {"status": "success", "balance": balance, "type": type_, 'id': id}
 
             return HttpResponse(json.dumps(dicts),
@@ -37,15 +51,20 @@ class IndexView(View):
 
         # 存钱
         if type_ == 'save':
+
+            result = dist_bank_client.bank_lookup_account(get_stub(), dist_bank_pb2.LookUpRequest(uid=id))
+
+            # 该ID 不存在
+            if result.uid == "0":
+                return HttpResponse('{"status":"fail", "type":"NoID"}',
+                                    content_type="application/json")
+
             amount = request.POST.get('amount', 0)
 
-            # invoke the function here, and use balance to receive the result
-
-            channel = grpc.insecure_channel('localhost:50051')
-            stub = dist_bank_pb2_grpc.DistBankStub(channel)
-
-            result = dist_bank_client.bank_save_money(stub, dist_bank_pb2.SaveRequest(uid=id,
+            result = dist_bank_client.bank_save_money(get_stub(), dist_bank_pb2.SaveRequest(uid=id,
                                                                                       save_amount=float(amount)))
+
+            print(result.index)
 
             balance = result.balance
 
@@ -56,14 +75,23 @@ class IndexView(View):
 
         # 提现
         if type_ == 'withdraw':
+
+            result = dist_bank_client.bank_lookup_account(get_stub(), dist_bank_pb2.LookUpRequest(uid=id))
+
+            # 该ID 不存在
+            if result.uid == "0":
+                return HttpResponse('{"status":"fail", "type":"NoID"}',
+                                    content_type="application/json")
+
             amount = request.POST.get('amount', 0)
 
-            # invoke the function here, and use balance to receive the result
-            channel = grpc.insecure_channel('localhost:50051')
-            stub = dist_bank_pb2_grpc.DistBankStub(channel)
+            result = dist_bank_client.bank_withdraw_money(get_stub(), dist_bank_pb2.WithdrawRequest(uid=id,
+                                                                                              with_amount=float(amount)))
 
-            result = dist_bank_client.bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid=id,
-                                                                                          with_amount=float(amount)))
+            # 余额不足
+            if result.index == -1:
+                return HttpResponse('{"status":"fail", "type":"NoEnoughMoney"}',
+                                    content_type="application/json")
 
             balance = result.balance
 

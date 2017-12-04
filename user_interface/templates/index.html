@@ -34,26 +34,15 @@
 
   <body>
 
-    <div class="container theme-showcase" role="main">
+    <div class="container theme-showcase" role="main" id="container">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div class="jumbotron" id="account">
         <h2>Current ID:      <span id="id" style="font-style: italic">{{ id }}</span></h2>
         <h2>Balance:      <span id="balance" style="color: #cc102d; font-style: italic">{{ balance }}</span></h2>
-
       </div>
 
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong>No Enough Balance!</strong>
-        </div>
-
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong>Opeartion Success!</strong>
-        </div>
-
-      <p>
+      <p id="content">
         <div class="input-group">
             <input type="text" id='user_id' class="form-control ui" placeholder="User ID" aria-describedby="basic-addon2">
         </div>
@@ -106,16 +95,53 @@
                     xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
                 },
                 success: function(data) {
+                    var content = document.getElementById("content")
+                    var div_container = document.getElementById("container")
+                    var new_div = document.createElement("div")
                     if(data.status == 'fail'){
+                        new_div.id = "noid"
+                        new_div.className = "alert alert-danger alert-dismissible"
+                        new_div.role = "alert"
+                        if(data.type == "NoID"){
+                            $('#balance').html(0)
+                            $('#id').html("Null")
+                            new_div.innerHTML = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
+                                "          <strong>No Such UID !</strong>"
+                            div_container.insertBefore(new_div, content)
+                        }
+
+                        if(data.type == "ValueError"){
+                            new_div.innerHTML = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
+                                "          <strong>Amount Must Be Integer !</strong>"
+                            div_container.insertBefore(new_div, content)
+                        }
+
+                        if(data.type == "NoEnoughMoney"){
+                            new_div.innerHTML = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
+                                "          <strong>No Enough Balance !</strong>"
+                            div_container.insertBefore(new_div, content)
+                        }
 
                     }else if(data.status == 'success'){
-                        if(data.type == 'save' || data.type == 'withdraw')
+                        new_div.id = "success"
+                        new_div.className = "alert alert-success alert-dismissible"
+                        new_div.role = "alert"
+                        if(data.type == 'save') {
                             $('#balance').html(data.balance)
+                            new_div.innerHTML = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
+                                                    "<strong>Successfully Save  " + $('#save_amount').val() + " !</strong>"
+                            div_container.insertBefore(new_div, content)
+                        }
+                        if(data.type == 'withdraw') {
+                            $('#balance').html(data.balance)
+                            new_div.innerHTML = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
+                                                    "<strong>Successfully Witdraw  " + $('#withdraw_amount').val() + " !</strong>"
+                            div_container.insertBefore(new_div, content)
+                        }
                         if(data.type == 'search'){
                             $('#balance').html(data.balance)
                             $('#id').html(data.id)
                         }
-
                     }
                 },
             });
@@ -124,15 +150,24 @@
 
 
         $('.search').on('click', function(){
-            opearte($(this), 'search', $('#user_id').val(), 0);
+            if($('#user_id').val() == "")
+                alert("Please Input UID !")
+            else
+                opearte($(this), 'search', $('#user_id').val(), 0);
         });
 
         $('.save').on('click', function(){
-            opearte($(this), 'save', $('#user_id').val(), $('#save_amount').val());
+            if($('#save_amount').val() == "")
+                alert("Amount Can Not Be Empty !")
+            else
+                opearte($(this), 'save', $('#user_id').val(), $('#save_amount').val());
         });
 
         $('.withdraw').on('click', function(){
-            opearte($(this), 'withdraw', $('#user_id').val(), $('#withdraw_amount').val());
+            if($('#withdraw_amount').val() == "")
+                alert("Amount Can Not Be Empty !")
+            else
+                opearte($(this), 'withdraw', $('#user_id').val(), $('#withdraw_amount').val());
         });
     </script>
   </body>
