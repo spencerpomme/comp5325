@@ -85,7 +85,9 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
                 return get_record(self.db, look_up_request)
             else:
                 print('res_flag: ', res_flag)
-                raise DatabaseOptFailure
+                # raise DatabaseOptFailure
+                return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
+
 
 
 

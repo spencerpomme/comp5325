@@ -75,7 +75,7 @@ def run(t_uid="5a221afc35b38f9a0ba44b2c"):
     bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid))
 
     print("-------------- withdraw --------------")
-    bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=200.0))
+    bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=2000000.0))
 
     print("-------------- LookupAccount --------------")
     bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid))

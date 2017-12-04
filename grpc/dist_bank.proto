@@ -10,9 +10,13 @@ package dist_bank;
 
 // definition of the service
 service DistBank {
+    // Methods for client-server communication:
     rpc LookUpAccount (LookUpRequest) returns (BalanceRecord) {}
     rpc Withdraw (WithdrawRequest) returns (BalanceRecord) {}
     rpc Save(SaveRequest) returns (BalanceRecord) {}
+
+    // Methods for server-server communication only, client shouldn't use these!
+    rpc Synchronize(SeverState) returns (SynAck) {}
 }
 
 // Look up account balance request.
@@ -37,13 +41,19 @@ message SaveRequest {
 }
 
 // Reply message for above requests
-// String info saying whether the request is successful and
-// float number update_balance tell the updated account balance
-// int number index for faster search.
+// res_info: String, saying whether the request is successful and
+//  balance: float number, tell the updated account balance
+//    index: int number, for faster search.
 // If account does not exist, only fail res_info will be replied.
 message BalanceRecord {
     string uid = 1;
     float balance = 2;
     int32 index = 3;
     string res_info = 4;
+}
+
+// Server state is tracked for server synchronization.
+//
+message ServerState {
+
 }
