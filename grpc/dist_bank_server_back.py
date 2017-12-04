@@ -14,11 +14,12 @@ _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 # Below defines the res_infos:
 _SUCCESS_RETRIVAL = '1'
 _RECORD_NOT_EXIST = '0'
+_NOT_ENOUGH_MONEY = '2'
 
 # DB modification flags send from dist_bank_resources
 _SUCCESS_MODIFIED = 0
 _MODIFICATION_ERR = 1
-_NOT_ENOUGH_MONEY = 2
+
 
 
 def get_record(dist_bank_db, request):
@@ -76,16 +77,24 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         self.update_db()
         record = get_record(self.db, request)
         if record is None:
-            return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
+            return dist_bank_pb2.BalanceRecord(uid="0",
+                                               balance=0,
+                                               index=-1,
+                                               res_info=_RECORD_NOT_EXIST)
         else:
+            look_up_request = dist_bank_pb2.LookUpRequest(uid=request.uid)
             res_flag = dist_bank_resources.modify_dist_bank_database_withdraw(request)
+
             if res_flag == _SUCCESS_MODIFIED:
-                # If res_flag is success, then construct a LookUpRequest to look up modified record:
-                look_up_request = dist_bank_pb2.LookUpRequest(uid=request.uid)
+                self.update_db()
                 return get_record(self.db, look_up_request)
             else:
                 print('res_flag: ', res_flag)
-                raise DatabaseOptFailure
+                # Return a not modified record:
+                return dist_bank_pb2.BalanceRecord(uid=look_up_request.uid,
+                                                   balance=self.LookUpAccount(request, context).balance,
+                                                   index=self.LookUpAccount(request, context).index,
+                                                   res_info=_RECORD_NOT_EXIST)
 
 
 
@@ -103,12 +112,28 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         else:
             res_flag = dist_bank_resources.modify_dist_bank_database_save(request)
             if res_flag == _SUCCESS_MODIFIED:
+                self.update_db()
                 # If res_flag is success, then construct a LookUpRequest to look up modified record:
                 look_up_request = dist_bank_pb2.LookUpRequest(uid=request.uid)
                 return get_record(self.db, look_up_request)
             else:
                 print('res_flag: ', res_flag)
                 raise DatabaseOptFailure
+
+
+    def ProbeStatus(self, request, context):
+        """
+        This method is for checking server status.
+        """
+        print("Method ProbeStatus called!")
+        return dist_bank_pb2.Status(alive=1)
+
+
+    def Synchronize(self, request, context):
+        """
+        Method to synchronize requests.
+        """
+        pass
 
     def update_db(self):
         """
@@ -127,6 +152,7 @@ def serve():
         DistBankServicer(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
+    print(dir(server))
     print('Server started.\n')
     try:
         while True:

@@ -13,6 +13,7 @@ from dist_bank_exceptions import *
 
 # Global variable
 PORTS = ['localhost:50051', 'localhost:50052']
+ALIVE = 0
 
 def bank_lookup_account(stub, request):
     """
@@ -23,6 +24,7 @@ def bank_lookup_account(stub, request):
      return:
     """
     # print("In method bank_lookup_account:")
+    server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
     result = stub.LookUpAccount(request) # <-- remember to check whether port is occupied!
     # from line 26 to 28 seem never gonna be reached!
     if result is None:
@@ -41,6 +43,7 @@ def bank_withdraw_money(stub, request):
      return:
     """
     # print("In method bank_withdraw_money:")
+    server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
     try:
         result = stub.Withdraw(request)
     except DatabaseOptFailure:
@@ -57,6 +60,7 @@ def bank_save_money(stub, request):
      return:
     """
     # print("In method bank_withdraw_money:")
+    server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!"))
     try:
         result = stub.Save(request)
     except DatabaseOptFailure:
@@ -73,6 +77,7 @@ def server_prober(stub, request):
         status = stub.ProbeStatus(request)
     except Exception as e:
         shift_server()
+        return 0
     else:
         return 1
 
@@ -81,7 +86,14 @@ def shift_server():
     """
     This method is change port when current connected server is down.
     """
-    pass
+    global ALIVE
+    if ALIVE == 0:
+        ALIVE = 1
+    elif ALIVE == 1:
+        ALIVE = 0
+    channel = grpc.insecure_channel(PORTS[ALIVE])
+    stub = dist_bank_pb2_grpc.DistBankStub(channel)
+
 
 
 
@@ -95,13 +107,7 @@ def run(t_uid="5a221afc35b38f9a0ba44b2c"):
     """
     print('FUCK')
     channel = grpc.insecure_channel('localhost:50051')
-    print(dir(channel))
     stub = dist_bank_pb2_grpc.DistBankStub(channel)
-    print(dir(stub))
-
-    print("-------------- Probe Server----------------")
-    if server_prober(stub, dist_bank_pb2.ProbeRequest(hey="hey!")):
-        print("hhahahahahahahahah")
 
     print("-------------- LookupAccount --------------")
     print(bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid)))
