@@ -96,5 +96,3 @@ class IndexView(View):
 
         return HttpResponse('{"status": "fail"}',
                             content_type="application/json")
-
-
