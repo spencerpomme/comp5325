@@ -86,6 +86,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
             res_flag = dist_bank_resources.modify_dist_bank_database_withdraw(request)
 
             if res_flag == _SUCCESS_MODIFIED:
+                self.update_db()
                 return get_record(self.db, look_up_request)
             else:
                 print('res_flag: ', res_flag)
@@ -95,6 +96,19 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
                                                    index=look_up_request.index,
                                                    res_info=_RECORD_NOT_EXIST)
 
+
+    def ProbeStatus(self, request, context):
+        """
+        This method is for checking server status.
+        """
+        pass
+
+
+    def Synchronize(self, request, context):
+        """
+        Method to synchronize requests.
+        """
+        pass
 
 
 
@@ -112,6 +126,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         else:
             res_flag = dist_bank_resources.modify_dist_bank_database_save(request)
             if res_flag == _SUCCESS_MODIFIED:
+                self.update_db()
                 # If res_flag is success, then construct a LookUpRequest to look up modified record:
                 look_up_request = dist_bank_pb2.LookUpRequest(uid=request.uid)
                 return get_record(self.db, look_up_request)
@@ -136,6 +151,7 @@ def serve():
         DistBankServicer(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
+    print(dir(server))
     print('Server started.\n')
     try:
         while True:
