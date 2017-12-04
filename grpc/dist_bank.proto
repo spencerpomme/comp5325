@@ -17,6 +17,7 @@ service DistBank {
 
     // Methods for server-server communication only, client shouldn't use these!
     rpc Synchronize(SeverState) returns (SynAck) {}
+    rpc
 }
 
 // Look up account balance request.
@@ -57,3 +58,5 @@ message BalanceRecord {
 message ServerState {
 
 }
+
+

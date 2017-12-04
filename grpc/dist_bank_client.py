@@ -72,19 +72,19 @@ def run(t_uid="5a221afc35b38f9a0ba44b2c"):
     stub = dist_bank_pb2_grpc.DistBankStub(channel)
 
     print("-------------- LookupAccount --------------")
-    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid))
+    print(bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid)))
 
     print("-------------- withdraw --------------")
-    bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=2000000.0))
+    print(bank_withdraw_money(stub, dist_bank_pb2.WithdrawRequest(uid=t_uid, with_amount=2000000.0)))
 
     print("-------------- LookupAccount --------------")
-    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid))
+    print(bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid)))
 
     print("-------------- save --------------")
-    bank_save_money(stub, dist_bank_pb2.SaveRequest(uid=t_uid, save_amount=100.0))
+    print(bank_save_money(stub, dist_bank_pb2.SaveRequest(uid=t_uid, save_amount=100.0)))
 
     print("-------------- LookupAccount --------------")
-    bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid))
+    print(bank_lookup_account(stub, dist_bank_pb2.LookUpRequest(uid=t_uid)))
 
 
 if __name__ == '__main__':
