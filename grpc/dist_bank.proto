@@ -14,9 +14,10 @@ service DistBank {
     rpc LookUpAccount (LookUpRequest) returns (BalanceRecord) {}
     rpc Withdraw (WithdrawRequest) returns (BalanceRecord) {}
     rpc Save(SaveRequest) returns (BalanceRecord) {}
+    rpc ProbeStatus (ProbeRequest) returns (Status) {}
 
     // Methods for server-server communication only, client shouldn't use these!
-    rpc Synchronize(SeverState) returns (SynAck) {}
+    rpc Synchronize(QueuedOperation) returns (SynAck) {}
 }
 
 // Look up account balance request.
@@ -52,14 +53,26 @@ message BalanceRecord {
     string res_info = 4;
 }
 
-// Server state is tracked for server synchronization.
-//
-message ServerState {
-
+// Message used to see whehter the server is alive
+message ProbeRequest {
+    string hey = 1;
 }
 
+// The response message to ProbeRequest message
+message Status {
+    int32 alive = 1;
+}
+
+// QueuedOperations. Used to synchronize between two servers.
+meessge QueuedOperation {
+    oneof requests {
+        LookUpRequest look_up_req = 1;
+        WithdrawRequest withdraw_req = 2;
+        SaveRequest save_req = 3;
+    }
+}
+
+// Response for synchronization, successful return 1, fail = 0.
 message SynAck {
-
+    int32 successful = 1;
 }
-
-
