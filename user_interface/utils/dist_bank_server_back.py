@@ -21,9 +21,8 @@ _SUCCESS_MODIFIED = 0
 _MODIFICATION_ERR = 1
 
 # connection to the other server
-channel = grpc.insecure_channel('localhost:50052')
+channel = grpc.insecure_channel('localhost:50051')
 stub = dist_bank_pb2_grpc.DistBankStub(channel)
-
 
 
 def get_record(dist_bank_db, request):
@@ -154,7 +153,7 @@ def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     dist_bank_pb2_grpc.add_DistBankServicer_to_server(
         DistBankServicer(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port('[::]:50052')
     server.start()
     print(dir(server))
     print('Server started.\n')

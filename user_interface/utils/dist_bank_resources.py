@@ -4,8 +4,6 @@ The balance data json utiliztion code.
 """
 
 import json
-# import dist_bank_pb2
-# from dist_bank_exceptions import *
 from . import dist_bank_pb2
 from .dist_bank_exceptions import *
 
