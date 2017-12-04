@@ -92,23 +92,9 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
                 print('res_flag: ', res_flag)
                 # Return a not modified record:
                 return dist_bank_pb2.BalanceRecord(uid=look_up_request.uid,
-                                                   balance=look_up_request.balance,
-                                                   index=look_up_request.index,
+                                                   balance=self.LookUpAccount(request, context).balance,
+                                                   index=self.LookUpAccount(request, context).index,
                                                    res_info=_RECORD_NOT_EXIST)
-
-
-    def ProbeStatus(self, request, context):
-        """
-        This method is for checking server status.
-        """
-        pass
-
-
-    def Synchronize(self, request, context):
-        """
-        Method to synchronize requests.
-        """
-        pass
 
 
 
@@ -133,6 +119,21 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
             else:
                 print('res_flag: ', res_flag)
                 raise DatabaseOptFailure
+
+
+    def ProbeStatus(self, request, context):
+        """
+        This method is for checking server status.
+        """
+        print("Method ProbeStatus called!")
+        return dist_bank_pb2.Status(alive=1)
+
+
+    def Synchronize(self, request, context):
+        """
+        Method to synchronize requests.
+        """
+        pass
 
     def update_db(self):
         """
