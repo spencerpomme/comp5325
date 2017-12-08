@@ -155,7 +155,7 @@ def serve():
         DistBankServicer(), server)
     server.add_insecure_port('[::]:50052')
     server.start()
-    print(dir(server))
+    # print(dir(server))
     print('Server started.\n')
     try:
         while True:
