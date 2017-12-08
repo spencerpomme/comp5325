@@ -79,7 +79,7 @@ class IndexView(View):
 
             amount = request.POST.get('amount', 0)
 
-            result = dist_bank_client.withdraw_wrapper(gdist_bank_pb2.WithdrawRequest(uid=id,
+            result = dist_bank_client.withdraw_wrapper(dist_bank_pb2.WithdrawRequest(uid=id,
                                                                                       with_amount=float(amount)))
 
             # 余额不足
