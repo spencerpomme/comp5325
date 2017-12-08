@@ -97,7 +97,8 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
                 # Return a not modified record:
                 return dist_bank_pb2.BalanceRecord(uid=look_up_request.uid,
                                                    balance=self.LookUpAccount(request, context).balance,
-                                                   index=self.LookUpAccount(request, context).index,
+                                                   # index=self.LookUpAccount(request, context).index,
+                                                   index=-1, # it's just for now!
                                                    res_info=_RECORD_NOT_EXIST)
 
 
