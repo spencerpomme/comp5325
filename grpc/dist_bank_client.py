@@ -126,7 +126,7 @@ def run(t_uid="5a221afc35b38f9a0ba44b2c"):
     Simple client runability tests.
     """
 
-    for i in range(10):
+    for i in range(100):
         print(look_up_wrapper(dist_bank_pb2.LookUpRequest(uid=t_uid)))
 
         # print("------------------- withdraw --------------")

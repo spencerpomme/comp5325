@@ -43,22 +43,21 @@ def modify_dist_bank_database_withdraw(request):
     try:
         dist_bank_db_file = open("dist_bank_db.json", "r")
         db = json.load(dist_bank_db_file)
-        print('bf wd-->', db[66])
+        print('bf wd-->', db[request.index])
         for i in range(len(db)):
             if db[i]["uid"] == request.uid:
                 if float(db[i]["balance"]) >= request.with_amount:
                     db[i].update({"balance": str(float(db[i]["balance"]) - request.with_amount)})
-                    break
+                    print('af wd-->', db[request.index])
+                    dist_bank_db_file.close()
+                    dist_bank_db_file = open("dist_bank_db.json", "w")
+                    json.dump(db, dist_bank_db_file)
+                    return _SUCCESS_MODIFIED
                 else:
+                    print("Not enough money!")
                     return _NOT_ENOUGH_MONEY
-        print('af wd-->', db[66])
-        dist_bank_db_file.close()
-        dist_bank_db_file = open("dist_bank_db.json", "w")
-        json.dump(db, dist_bank_db_file)
     except:
         return _MODIFICATION_ERR
-    else:
-        return _SUCCESS_MODIFIED
     finally:
         dist_bank_db_file.close()
 

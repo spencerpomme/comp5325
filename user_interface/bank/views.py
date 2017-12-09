@@ -36,7 +36,7 @@ class IndexView(View):
                 return HttpResponse('{"status":"fail", "type":"NoID"}',
                                     content_type="application/json")
 
-            balance = result.balance
+            balance = int(result.balance)
             uid_exist = True
             dicts = {"status": "success", "balance": balance, "type": type_, 'id': id}
 
@@ -60,7 +60,7 @@ class IndexView(View):
 
             print(result.index)
 
-            balance = result.balance
+            balance = int(result.balance)
 
             dicts = {"status": "success", "balance": balance, "type": type_}
 
@@ -83,11 +83,12 @@ class IndexView(View):
                                                                                       with_amount=float(amount)))
 
             # 余额不足
+            print("resutl.index: ", result.index)
             if result.index == -1:
                 return HttpResponse('{"status":"fail", "type":"NoEnoughMoney"}',
                                     content_type="application/json")
 
-            balance = result.balance
+            balance = int(result.balance)
 
             dicts = {"status": "success", "balance": balance, "type": type_}
 

@@ -14,7 +14,7 @@ _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 # Below defines the res_infos:
 _SUCCESS_RETRIVAL = '1'
 _RECORD_NOT_EXIST = '0'
-_NOT_ENOUGH_MONEY = '2'
+_NOT_ENOUGH_MONEY = 2
 
 # DB modification flags send from dist_bank_resources
 _SUCCESS_MODIFIED = 0
