@@ -59,6 +59,7 @@ message ProbeRequest {
 }
 
 // The response message to ProbeRequest message
+// alive = 1 if alive else 0.
 message Status {
     int32 alive = 1;
 }

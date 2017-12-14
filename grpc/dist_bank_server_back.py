@@ -49,7 +49,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         """
         Load account data
         """
-        self.db = dist_bank_resources.read_dist_bank_database()
+        self.db = dist_bank_resources.read_dist_bank_database("backup")
         # print(type(self.db))    <-- type: <class 'list'>
         # print(type(self.db[0])) <-- type: <class 'dist_bank_pb2.BalanceRecord'>
         # print(self.db)
@@ -61,7 +61,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         request: A LookUpRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        print('Method LookUpAccount called:')
+        print('Method LookUpAccount in backup server get called:')
         self.update_db()
         record = get_record(self.db, request)
         if record is None:
@@ -76,7 +76,8 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         request: A WithdrawRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        print('Method Withdraw called:')
+        print('Method Withdraw in backup server get called:')
+        stub.Withdraw(request)
         self.update_db()
         record = get_record(self.db, request)
         if record is None:
@@ -86,7 +87,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
                                                res_info=_RECORD_NOT_EXIST)
         else:
             look_up_request = dist_bank_pb2.LookUpRequest(uid=request.uid)
-            res_flag = dist_bank_resources.modify_dist_bank_database_withdraw(request)
+            res_flag = dist_bank_resources.modify_dist_bank_database_withdraw(request, "backup")
 
             if res_flag == _SUCCESS_MODIFIED:
                 self.update_db()
@@ -108,13 +109,13 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         request: A SaveRequest (see dist_bank.proto)
         return: A BalanceRecord response (see dist_bank.proto)
         """
-        print('Method Save called:')
+        print('Method Save in backup server get called:')
         self.update_db()
         record = get_record(self.db, request)
         if record is None:
             return dist_bank_pb2.BalanceRecord(uid="0", balance=0, index=-1, res_info=_RECORD_NOT_EXIST)
         else:
-            res_flag = dist_bank_resources.modify_dist_bank_database_save(request)
+            res_flag = dist_bank_resources.modify_dist_bank_database_save(request, "backup")
             if res_flag == _SUCCESS_MODIFIED:
                 self.update_db()
                 # If res_flag is success, then construct a LookUpRequest to look up modified record:
@@ -129,7 +130,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         """
         This method is for checking server status.
         """
-        print("Method ProbeStatus called!")
+        print("Method ProbeStatus in backup server get called!")
         return dist_bank_pb2.Status(alive=1)
 
 
@@ -143,7 +144,7 @@ class DistBankServicer(dist_bank_pb2_grpc.DistBankServicer):
         """
         Update after modification
         """
-        self.db = dist_bank_resources.read_dist_bank_database()
+        self.db = dist_bank_resources.read_dist_bank_database("backup")
 
 
 
@@ -157,7 +158,7 @@ def serve():
     server.add_insecure_port('[::]:50052')
     server.start()
     # print(dir(server))
-    print('Server started.\n')
+    print('Backup Server started.\n')
     try:
         while True:
             time.sleep(_ONE_DAY_IN_SECONDS)

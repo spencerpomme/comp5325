@@ -12,7 +12,7 @@ _MODIFICATION_ERR = 1
 _NOT_ENOUGH_MONEY = 2
 
 
-def read_dist_bank_database():
+def read_dist_bank_database(server):
     """
     Reads the dist bank database.
 
@@ -21,7 +21,7 @@ def read_dist_bank_database():
         dist_bank_pb2.BalanceRecord.
     """
     record_list = []
-    with open("dist_bank_db.json") as dist_bank_db_file:
+    with open("dist_bank_db_%s.json" % server) as dist_bank_db_file:
         for item in json.load(dist_bank_db_file):
             record = dist_bank_pb2.BalanceRecord(
                 uid=item["uid"],
@@ -32,7 +32,7 @@ def read_dist_bank_database():
     return record_list
 
 
-def modify_dist_bank_database_withdraw(request):
+def modify_dist_bank_database_withdraw(request, server):
     """
     Modifies dist bank database upon withdraw operation.
 
@@ -41,7 +41,7 @@ def modify_dist_bank_database_withdraw(request):
     returns: bool
     """
     try:
-        dist_bank_db_file = open("dist_bank_db.json", "r")
+        dist_bank_db_file = open("dist_bank_db.json_%s" % server, "r")
         db = json.load(dist_bank_db_file)
         print('bf wd-->', db[66])
         for i in range(len(db)):
@@ -53,7 +53,7 @@ def modify_dist_bank_database_withdraw(request):
                     return _NOT_ENOUGH_MONEY
         print('af wd-->', db[66])
         dist_bank_db_file.close()
-        dist_bank_db_file = open("dist_bank_db.json", "w")
+        dist_bank_db_file = open("dist_bank_db.json_%s" % server, "w")
         json.dump(db, dist_bank_db_file)
     except:
         return _MODIFICATION_ERR
@@ -62,7 +62,7 @@ def modify_dist_bank_database_withdraw(request):
     finally:
         dist_bank_db_file.close()
 
-def modify_dist_bank_database_save(request):
+def modify_dist_bank_database_save(request, server):
     """
     Modifies dist bank database upon save operation.
 
@@ -71,7 +71,7 @@ def modify_dist_bank_database_save(request):
     returns: bool
     """
     try:
-        dist_bank_db_file = open("dist_bank_db.json", "r")
+        dist_bank_db_file = open("dist_bank_db.json_%s" % server, "r")
         db = json.load(dist_bank_db_file)
         print('bf sv-->', db[66])
         for i in range(len(db)):
@@ -79,7 +79,7 @@ def modify_dist_bank_database_save(request):
                 db[i].update({"balance": str(float(db[i]["balance"]) + request.save_amount)})
         print('af sv-->', db[66])
         dist_bank_db_file.close()
-        dist_bank_db_file = open("dist_bank_db.json", "w")
+        dist_bank_db_file = open("dist_bank_db.json_%s" % server, "w")
         json.dump(db, dist_bank_db_file)
     except:
         return _MODIFICATION_ERR
